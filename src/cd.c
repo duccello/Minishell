@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.h                                              :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 15:01:55 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/21 15:02:30 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/21 18:00:50 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMD_H
-# define CMD_H
+#include <stdio.h>
+#include <unistd.h>
+#include "structs.h"
 
-t_cmd	*create_cmd(char *s);
+void	cd(t_data *data)
+{
+	char	*cwd;
 
-#endif
+	(void)data;
+	cwd = getcwd(NULL, 0);
+	printf("%s\n", cwd);
+}
