@@ -1,5 +1,5 @@
 CC 			= 	cc
-FLAGS		=	-g -Wall -Wextra -Werror
+FLAGS		=	-g -Wall -Wextra -Werror -lreadline
 INCS		=	-Iinc
 SRC_DIR		=	src
 OBJ_DIR		=	build
