@@ -1,11 +1,13 @@
 CC 			= 	cc
 FLAGS		=	-g -Wall -Wextra -Werror -lreadline
-INCS		=	-Iinc
+INCS		=	-Iinc											\
+				-Ilibft/inc
 SRC_DIR		=	src
 OBJ_DIR		=	build
 SRCS		=	main.c
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+LIBFT		=	-Llibft -lft
 NAME		=	minishell
 
 all:		$(NAME)
