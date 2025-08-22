@@ -6,20 +6,26 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 11:36:42 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 12:01:57 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
 #include "libft.h"
 #include "built_in.h"
+#include "macros.h"
 
 /* Wrapper that handles built-in commands. */
 void	handle_built_in(t_data *data)
 {
-	(void)data;
-	printf("handling built in command...\n");
+	if (ft_strncmp(data->cmd->name, data->built_ins[EXIT],
+				ft_strlen(data->cmd->name) + 1) == 0)
+		exit (EXIT_SUCCESS);
+	if (ft_strncmp(data->cmd->name, data->built_ins[CD],
+				ft_strlen(data->cmd->name) + 1) == 0)
+		cd(data);
 }
 
 /* It checks if the string given corresponds to any of the strings

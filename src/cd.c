@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 10:06:29 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 12:09:02 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 #include "libft.h"
 
 /* It changes the working directory by checking argv[1].
- * If argv[1][0] is '/', it calls chdir() directly, otherwise it calls
- * getcwd() and appends to the return string argv[1]. */
+ * If name[0] is '/', it calls chdir() directly, otherwise it calls
+ * getcwd() and appends to its return value the string.
+ * The dynamically allocated strings (cwd, nd) are also freed. */
 int	cd(t_data *data)
 {
 	char	*cwd;
