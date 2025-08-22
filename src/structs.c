@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:53:52 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 12:10:03 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:26:24 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include "structs.h"
 #include "libft.h"
 #include "macros.h"
+#include "list.h"
 
 /* It creates and dynamically allocates the main structure.
- * It stores the environment variables in the structure. */
+ * It calls the other create function to create its elements. */
 t_data	*create_data(char **envp)
 {
 	t_data	*data;
@@ -24,7 +25,8 @@ t_data	*create_data(char **envp)
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (NULL);
-	data->envp = envp;
+	data->envp = create_list(envp);
+	data->built_ins = create_built_ins();
 	return (data);
 }
 
@@ -47,6 +49,7 @@ char	**create_built_ins(void)
 	arr[NUM_BUILT_INS] = NULL;
 	return (arr);
 }
+
 /* It creates and dynamically allocates the structure containing
  * the path of the command, its argument vector, and its name. */
 t_cmd	*create_cmd(char *s)

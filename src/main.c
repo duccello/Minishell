@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 13:19:17 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:36:41 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)argv;
 	banner();
 	data = create_data(envp);
-	data->built_ins = create_built_ins();
 	while (1)
 	{
 		data->line = readline(NULL);

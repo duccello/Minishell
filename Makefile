@@ -8,6 +8,7 @@ SRCS		=	banner.c										\
 				built_in.c										\
 				cd.c											\
 				main.c											\
+				list.c											\
 				pwd.c											\
 				structs.c
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))
