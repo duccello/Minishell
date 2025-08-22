@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   banner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 17:57:46 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 12:49:48 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/22 12:56:10 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/22 13:02:54 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#include <stdio.h>
 
-# include <stdbool.h>
-# include "structs.h"
-
-void	handle_built_in(t_data *data);
-bool	cmd_is_built_in(char *s, char **built_ins);
-int		cd(t_data *data);
-void	pwd(void);
-
-#endif
+void	banner(void)
+{
+	printf("\n");
+	printf(" \\   | _ _|   \\ | _ _|   __|  |  |  __|  |     |   \n");
+	printf(" |\\/ |   |   .  |   |  \\__ \\  __ |  _|   |     |   \n");
+	printf("_|  _| ___| _|\\_| ___| ____/ _| _| ___| ____| ____|\n");
+	printf("\n");
+}

@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 12:01:57 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 12:50:02 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include "built_in.h"
 #include "macros.h"
 
-/* Wrapper that handles built-in commands. */
+/* Wrapper that handles built-in commands.
+ * It checks the name of the command and calls a function accordingly. */
 void	handle_built_in(t_data *data)
 {
 	if (ft_strncmp(data->cmd->name, data->built_ins[EXIT],
@@ -26,6 +27,9 @@ void	handle_built_in(t_data *data)
 	if (ft_strncmp(data->cmd->name, data->built_ins[CD],
 				ft_strlen(data->cmd->name) + 1) == 0)
 		cd(data);
+	if (ft_strncmp(data->cmd->name, data->built_ins[PWD],
+				ft_strlen(data->cmd->name) + 1) == 0)
+		pwd();
 }
 
 /* It checks if the string given corresponds to any of the strings

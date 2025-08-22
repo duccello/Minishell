@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 11:36:23 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 12:59:21 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft.h"
 #include "built_in.h"
 #include "binary_exec.h"
+#include "banner.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -24,6 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
+	banner();
 	data = create_data(envp);
 	data->built_ins = create_built_ins();
 	while (1)

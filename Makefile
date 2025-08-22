@@ -4,9 +4,11 @@ INCS		=	-Iinc											\
 				-Ilibft/inc
 SRC_DIR		=	src
 OBJ_DIR		=	build
-SRCS		=	main.c											\
+SRCS		=	banner.c										\
 				built_in.c										\
 				cd.c											\
+				main.c											\
+				pwd.c											\
 				structs.c
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

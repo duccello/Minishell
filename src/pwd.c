@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 17:57:46 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 12:49:48 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/22 12:39:54 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/22 12:50:37 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-# include <stdbool.h>
-# include "structs.h"
+/* It calls getcwd(), prints its return value and then frees it. */
+void	pwd(void)
+{
+	char	*s;
 
-void	handle_built_in(t_data *data);
-bool	cmd_is_built_in(char *s, char **built_ins);
-int		cd(t_data *data);
-void	pwd(void);
+	s = getcwd(NULL, 0);
+	printf("%s\n", s);
+	free(s);
+}
 
-#endif
