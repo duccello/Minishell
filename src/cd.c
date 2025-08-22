@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 13:43:45 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:26:26 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,45 +16,67 @@
 #include "structs.h"
 #include "libft.h"
 
-/* It changes the working directory by checking argv[1].
- * If name[0] is '/', it calls chdir() directly, otherwise it calls
- * getcwd() and appends to its return value the string.
- * The dynamically allocated strings (cwd, nd) are also freed. */
+static int	handle_abs_path(char *s);
+static int	handle_rel_path(char *s);
+
+/* It checks the second element of the argv array and:
+ * - if it is NULL, the function does nothing
+ * - if it starts with '/', it calls the function
+ *   responsible for the absolute path
+ * - otherwise calls the function responsible for
+ *   the relative path */
 int	cd(t_data *data)
+{
+	if (data->cmd->argv[1] == NULL)
+		;
+	else if (data->cmd->argv[1][0] == '/')
+	{
+		if (handle_abs_path(data->cmd->argv[1]) == -1)
+			return (-1);
+	}
+	else
+	{
+		if (handle_rel_path(data->cmd->argv[1]) == -1)
+			return (-1);
+	}
+	return (0);
+}
+
+/* It calls chdir() passing as parameter the string given. */
+static int	handle_abs_path(char *s)
+{
+	if (chdir(s) == -1)
+	{
+		perror("chdir");
+		return (-1);
+	}
+	return (0);
+}
+
+/* It appends the relative path to the current working directory
+ * and passes the obtained string to chdir(). 
+ * It also frees the two dynamically allocated strings. */
+static int	handle_rel_path(char *s)
 {
 	char	*cwd;
 	char	*nd;
 
-	if (data->cmd->argv[1] != NULL && data->cmd->argv[1][0] == '/')
+	cwd = getcwd(NULL, 0);
+	if (cwd == NULL)
 	{
-		if (chdir(data->cmd->argv[1]) == -1)
-		{
-			perror("chdir");
-			return (-1);
-		}
+		perror("getcwd");
+		return (-1);
 	}
-	else
+	cwd = ft_strjoin(cwd, "/");
+	nd = ft_strjoin(cwd, s);
+	if (chdir(nd) == -1)
 	{
-		cwd = getcwd(NULL, 0);
-		if (cwd == NULL)
-		{
-			perror("getcwd");
-			return (-1);
-		}
-		cwd = ft_strjoin(cwd, "/");
-		if (data->cmd->argv[1] != NULL)
-			nd = ft_strjoin(cwd, data->cmd->argv[1]);
-		else
-			nd = ft_strdup(cwd);
-		if (chdir(nd) == -1)
-		{
-			perror("chdir");
-			return (-1);
-		}
-		if (cwd != NULL)
-			free(cwd);
-		if (nd != NULL)
-			free(nd);
+		perror("chdir");
+		return (-1);
 	}
+	if (cwd != NULL)
+		free(cwd);
+	if (nd != NULL)
+		free(nd);
 	return (0);
 }
