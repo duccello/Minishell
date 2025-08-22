@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:57:46 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/21 17:58:53 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 09:48:20 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 #include "structs.h"
 
-void	cd(t_data *data);
+int	cd(t_data *data);
 
 #endif

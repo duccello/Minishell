@@ -6,23 +6,49 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/21 18:24:21 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 10:06:29 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include "structs.h"
+#include "libft.h"
 
-void	cd(t_data *data)
+/* It changes the working directory by checking argv[1].
+ * If argv[1][0] is '/', it calls chdir() directly, otherwise it calls
+ * getcwd() and appends to the return string argv[1]. */
+int	cd(t_data *data)
 {
 	char	*cwd;
+	char	*nd;
 
 	if (data->cmd->argv[1][0] == '/')
-		chdir(data->cmd->argv[1]);
+	{
+		if (chdir(data->cmd->argv[1]) == -1)
+		{
+			perror("chdir");
+			return (-1);
+		}
+	}
 	else
 	{
 		cwd = getcwd(NULL, 0);
-		printf("%s\n", cwd);
+		if (cwd == NULL)
+		{
+			perror("getcwd");
+			return (-1);
+		}
+		cwd = ft_strjoin(cwd, "/");
+		nd = ft_strjoin(cwd, data->cmd->argv[1]);
+		if (chdir(nd) == -1)
+		{
+			perror("chdir");
+			return (-1);
+		}
+		free(cwd);
+		free(nd);
 	}
+	return (0);
 }

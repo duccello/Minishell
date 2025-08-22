@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/21 18:09:01 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 10:01:43 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ int	main(int argc, char *argv[], char *envp[])
 		else
 		{
 			data->pid = fork();
+			if (data->pid == -1)
+			{
+				perror("fork");
+				return (1);
+			}
 			if (data->pid == 0)
 				execve(data->cmd->path, data->cmd->argv, envp);
 			else
