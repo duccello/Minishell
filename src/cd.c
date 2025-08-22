@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 12:09:02 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 13:43:45 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	cd(t_data *data)
 	char	*cwd;
 	char	*nd;
 
-	if (data->cmd->argv[1][0] == '/')
+	if (data->cmd->argv[1] != NULL && data->cmd->argv[1][0] == '/')
 	{
 		if (chdir(data->cmd->argv[1]) == -1)
 		{
@@ -42,14 +42,19 @@ int	cd(t_data *data)
 			return (-1);
 		}
 		cwd = ft_strjoin(cwd, "/");
-		nd = ft_strjoin(cwd, data->cmd->argv[1]);
+		if (data->cmd->argv[1] != NULL)
+			nd = ft_strjoin(cwd, data->cmd->argv[1]);
+		else
+			nd = ft_strdup(cwd);
 		if (chdir(nd) == -1)
 		{
 			perror("chdir");
 			return (-1);
 		}
-		free(cwd);
-		free(nd);
+		if (cwd != NULL)
+			free(cwd);
+		if (nd != NULL)
+			free(nd);
 	}
 	return (0);
 }
