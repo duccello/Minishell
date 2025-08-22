@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.h                                               :+:      :+:    :+:   */
+/*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:57:46 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 09:48:20 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 11:35:45 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CD_H
-# define CD_H
+#ifndef BUILT_IN_H
+# define BUILT_IN_H
 
-#include "structs.h"
+# include <stdbool.h>
+# include "structs.h"
 
-int	cd(t_data *data);
+void	handle_built_in(t_data *data);
+bool	cmd_is_built_in(char *s, char **built_ins);
+int		cd(t_data *data);
 
 #endif

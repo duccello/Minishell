@@ -5,6 +5,7 @@ INCS		=	-Iinc											\
 SRC_DIR		=	src
 OBJ_DIR		=	build
 SRCS		=	main.c											\
+				built_in.c										\
 				cd.c											\
 				structs.c
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))

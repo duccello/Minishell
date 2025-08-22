@@ -6,18 +6,17 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 10:01:43 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/22 11:36:23 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <sys/wait.h>
 #include "structs.h"
 #include "libft.h"
-#include "cd.h"
+#include "built_in.h"
+#include "binary_exec.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -25,29 +24,16 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
-	data = create_data();
+	data = create_data(envp);
+	data->built_ins = create_built_ins();
 	while (1)
 	{
 		data->line = readline(NULL);
-		if (ft_strncmp(data->line, "exit", ft_strlen(data->line)) == 0)
-			break ;
 		data->cmd = create_cmd(data->line);
-		if (ft_strncmp(data->cmd->argv[0], "cd",
-					ft_strlen(data->cmd->argv[0])) == 0)
-			cd(data);
+		if (cmd_is_built_in(data->cmd->argv[0], data->built_ins) == true)
+			handle_built_in(data);
 		else
-		{
-			data->pid = fork();
-			if (data->pid == -1)
-			{
-				perror("fork");
-				return (1);
-			}
-			if (data->pid == 0)
-				execve(data->cmd->path, data->cmd->argv, envp);
-			else
-				wait(NULL);
-		}
+			printf("ERROR: not a minishell built-in\n"); 
 	}
 	return (0);
 }
