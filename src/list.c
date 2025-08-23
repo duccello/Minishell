@@ -6,12 +6,13 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:46:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 15:28:45 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/23 14:41:14 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "list.h"
+#include "libft.h"
 #include "structs.h"
 #include "stddef.h"
 
@@ -54,6 +55,30 @@ void	append_node(t_node **list, t_node *node)
 	{
 		last_node = find_last_node(*list);
 		last_node->next = node;
+	}
+}
+
+/* The third argument of the strncmp function is the length of
+ * the string given, because I want that
+ * ft_strncmp("NAME=value", "NAME=", strlen("NAME=")
+ * returns 0 */
+void	delete_node(t_node **list, char *s)
+{
+	t_node	*curr;
+	t_node	*prev;
+
+	prev = NULL;
+	curr = *list;
+	while (curr != NULL)
+	{
+		if (ft_strncmp(curr->s, s, ft_strlen(s)) == 0)
+		{
+			prev->next = curr->next;
+			free(curr);
+			break ;
+		}
+		prev = curr;
+		curr = curr->next;
 	}
 }
 

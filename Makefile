@@ -13,7 +13,8 @@ SRCS		=	banner.c										\
 				main.c											\
 				list.c											\
 				pwd.c											\
-				structs.c
+				structs.c										\
+				unset.c
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 LIBFT		=	-Llibft -lft

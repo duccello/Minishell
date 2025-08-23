@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.h                                             :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/22 14:54:02 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 14:34:39 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/23 13:31:40 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/23 14:35:44 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIST_H
-# define LIST_H
+#include <stdlib.h>
+#include "ft_printf.h"
+#include "libft.h"
+#include "list.h"
+#include "structs.h"
 
-typedef struct s_node
+void	unset(t_data *data)
 {
-	char			*s;
-	struct s_node	*next;
-}	t_node;
+	char *s;
 
-t_node	*create_list(char **arr);
-t_node	*create_node(char *s);
-void	append_node(t_node **list, t_node *node);
-void	delete_node(t_node **list, char *s);
-t_node	*find_last_node(t_node *list);
-
-#endif
+	s = ft_strjoin(data->cmd->argv[1], "=");
+	delete_node(&data->envp, s);
+	if (s != NULL)
+		free(s);
+}

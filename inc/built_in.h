@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:57:46 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 12:59:31 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/23 13:32:28 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	pwd(void);
 void	echo(t_data *data);
 void	export(t_data *data);
 void	env(t_data *data);
+void	unset(t_data *data);
 
 #endif
