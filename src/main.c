@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 16:11:44 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:31:17 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		data->line = readline("> ");
+		if (data->line == NULL)
+			break ;
 		if (data->line[0] == '\0')
 			;
 		else
