@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 17:57:46 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 12:29:07 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/23 12:24:36 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/23 12:32:10 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#include <stdio.h>
+#include "libft.h"
+#include "ft_printf.h"
+#include "structs.h"
+#include "macros.h"
 
-# include <stdbool.h>
-# include "structs.h"
-
-void	handle_built_in(t_data *data);
-bool	cmd_is_built_in(char *s, char **built_ins);
-int		cd(t_data *data);
-void	pwd(void);
-void	echo(t_data *data);
-
-#endif
+void	echo(t_data *data)
+{
+	if (ft_strncmp(data->cmd->argv[1], "-n",
+			ft_strlen(data->cmd->argv[1]) + 1) == 0)
+		ft_printf("%s", data->cmd->argv[2]);
+	else
+		ft_printf("%s\n", data->cmd->argv[1]);
+}

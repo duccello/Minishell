@@ -7,6 +7,7 @@ OBJ_DIR		=	build
 SRCS		=	banner.c										\
 				built_in.c										\
 				cd.c											\
+				echo.c											\
 				main.c											\
 				list.c											\
 				pwd.c											\

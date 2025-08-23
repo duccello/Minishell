@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 12:50:02 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/23 12:24:24 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	handle_built_in(t_data *data)
 	if (ft_strncmp(data->cmd->name, data->built_ins[PWD],
 				ft_strlen(data->cmd->name) + 1) == 0)
 		pwd();
+	if (ft_strncmp(data->cmd->name, data->built_ins[ECHO],
+				ft_strlen(data->cmd->name) + 1) == 0)
+		echo(data);
 }
 
 /* It checks if the string given corresponds to any of the strings
