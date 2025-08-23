@@ -6,13 +6,13 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 12:39:54 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 12:36:43 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:25:11 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "ft_printf.h"
 
 /* It calls getcwd(), prints its return value and then frees it. */
 void	pwd(void)
@@ -20,7 +20,7 @@ void	pwd(void)
 	char	*s;
 
 	s = getcwd(NULL, 0);
-	ft_printf("%s\n", s);
+	printf("%s\n", s);
 	free(s);
 }
 
