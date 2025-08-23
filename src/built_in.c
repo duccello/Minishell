@@ -6,12 +6,11 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 12:24:24 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/23 12:53:46 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <stddef.h>
 #include "libft.h"
 #include "built_in.h"
@@ -33,6 +32,12 @@ void	handle_built_in(t_data *data)
 	if (ft_strncmp(data->cmd->name, data->built_ins[ECHO],
 				ft_strlen(data->cmd->name) + 1) == 0)
 		echo(data);
+	if (ft_strncmp(data->cmd->name, data->built_ins[EXPORT],
+				ft_strlen(data->cmd->name) + 1) == 0)
+		export(data);
+	if (ft_strncmp(data->cmd->name, data->built_ins[ENV],
+				ft_strlen(data->cmd->name) + 1) == 0)
+		env(data);
 }
 
 /* It checks if the string given corresponds to any of the strings

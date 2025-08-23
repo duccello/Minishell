@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   banner.c                                           :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/22 12:56:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 12:35:16 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/23 12:48:38 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/23 12:52:58 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "list.h"
+#include "structs.h"
 
-void	banner(void)
+void	export(t_data *data)
 {
-	ft_printf("\n");
-	ft_printf(" \\   | _ _|   \\ | _ _|   __|  |  |  __|  |     |   \n");
-	ft_printf(" |\\/ |   |   .  |   |  \\__ \\  __ |  _|   |     |   \n");
-	ft_printf("_|  _| ___| _|\\_| ___| ____/ _| _| ___| ____| ____|\n");
-	ft_printf("\n");
+	t_node	*node;
+
+	node = create_node(data->cmd->argv[1]);
+	append_node(&data->envp, node);
 }
+	

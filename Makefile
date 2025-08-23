@@ -8,6 +8,8 @@ SRCS		=	banner.c										\
 				built_in.c										\
 				cd.c											\
 				echo.c											\
+				env.c											\
+				export.c										\
 				main.c											\
 				list.c											\
 				pwd.c											\

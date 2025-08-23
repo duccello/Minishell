@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   banner.c                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/22 12:56:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 12:35:16 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/23 12:54:55 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/23 12:58:16 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "list.h"
+#include "structs.h"
 #include "ft_printf.h"
 
-void	banner(void)
+void	env(t_data *data)
 {
-	ft_printf("\n");
-	ft_printf(" \\   | _ _|   \\ | _ _|   __|  |  |  __|  |     |   \n");
-	ft_printf(" |\\/ |   |   .  |   |  \\__ \\  __ |  _|   |     |   \n");
-	ft_printf("_|  _| ___| _|\\_| ___| ____/ _| _| ___| ____| ____|\n");
-	ft_printf("\n");
+	t_node *curr;
+
+	curr = data->envp;
+	while (curr != NULL)
+	{
+		ft_printf("%s\n", curr->s);
+		curr = curr->next;
+	}
 }
+
