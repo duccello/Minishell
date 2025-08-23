@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 14:36:41 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:11:44 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ int	main(int argc, char *argv[], char *envp[])
 	data = create_data(envp);
 	while (1)
 	{
-		data->line = readline(NULL);
+		data->line = readline("> ");
 		if (data->line[0] == '\0')
-			printf("\n");
+			;
 		else
 		{
+			add_history(data->line);
 			data->cmd = create_cmd(data->line);
 			if (cmd_is_built_in(data->cmd->argv[0], data->built_ins) == true)
 				handle_built_in(data);

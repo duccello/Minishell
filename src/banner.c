@@ -6,17 +6,24 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 12:56:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 12:35:16 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/23 15:26:37 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "ft_printf.h"
 
 void	banner(void)
 {
 	ft_printf("\n");
+
+	usleep(200000);
 	ft_printf(" \\   | _ _|   \\ | _ _|   __|  |  |  __|  |     |   \n");
+	usleep(200000);
 	ft_printf(" |\\/ |   |   .  |   |  \\__ \\  __ |  _|   |     |   \n");
+	usleep(200000);
 	ft_printf("_|  _| ___| _|\\_| ___| ____/ _| _| ___| ____| ____|\n");
+	usleep(200000);
 	ft_printf("\n");
+	usleep(200000);
 }
