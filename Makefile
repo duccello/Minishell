@@ -14,7 +14,11 @@ SRCS		=	banner.c										\
 				list.c											\
 				pwd.c											\
 				structs.c										\
-				unset.c
+				unset.c											\
+				pipex.c											\
+				parsing.c										\
+				parsing_utis.c										\
+				freeing_pipes.c				
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 LIBFT		=	-Llibft -lft

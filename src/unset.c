@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
 #include "list.h"
 #include "structs.h"
+#include <stdlib.h>
 
 void	unset(t_data *data)
 {
-	char *s;
+	char	*s;
 
 	s = ft_strjoin(data->cmd->argv[1], "=");
 	delete_node(&data->envp, s);

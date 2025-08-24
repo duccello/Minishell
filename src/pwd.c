@@ -23,4 +23,3 @@ void	pwd(void)
 	printf("%s\n", s);
 	free(s);
 }
-

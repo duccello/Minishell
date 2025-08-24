@@ -10,14 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "structs.h"
-#include "libft.h"
-#include "built_in.h"
-#include "binary_exec.h"
 #include "banner.h"
+#include "binary_exec.h"
+#include "built_in.h"
+#include "libft.h"
+#include "pipex.h"
+#include "structs.h"
+#include <readline/history.h>
+#include <readline/readline.h>
+#include <stdlib.h>
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -38,10 +39,13 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			add_history(data->line);
 			data->cmd = create_cmd(data->line);
-			if (cmd_is_built_in(data->cmd->argv[0], data->built_ins) == true)
+			if (ft_strchr(data->line, '|') != NULL)
+				pipes(data->line, envp);
+			else if (cmd_is_built_in(data->cmd->argv[0],
+					data->built_ins) == true)
 				handle_built_in(data);
 			else
-				printf("ERROR: not a minishell built-in\n"); 
+				printf("ERROR: not a minishell built-in\n");
 		}
 	}
 	// clean_all(data)

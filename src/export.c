@@ -20,4 +20,3 @@ void	export(t_data *data)
 	node = create_node(data->cmd->argv[1]);
 	append_node(&data->envp, node);
 }
-	

@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "list.h"
 #include "structs.h"
+#include <stdio.h>
 
 void	env(t_data *data)
 {
-	t_node *curr;
+	t_node	*curr;
 
 	curr = data->envp;
 	while (curr != NULL)
@@ -25,4 +25,3 @@ void	env(t_data *data)
 		curr = curr->next;
 	}
 }
-

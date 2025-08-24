@@ -10,37 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stddef.h>
-#include "libft.h"
 #include "built_in.h"
+#include "libft.h"
 #include "macros.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 /* Wrapper that handles built-in commands.
  * It checks the name of the command and calls a function accordingly. */
 void	handle_built_in(t_data *data)
 {
 	if (ft_strncmp(data->cmd->name, data->built_ins[ECHO],
-				ft_strlen(data->cmd->name) + 1) == 0)
+			ft_strlen(data->cmd->name) + 1) == 0)
 		echo(data);
 	if (ft_strncmp(data->cmd->name, data->built_ins[CD],
-				ft_strlen(data->cmd->name) + 1) == 0)
+			ft_strlen(data->cmd->name) + 1) == 0)
 		cd(data);
 	if (ft_strncmp(data->cmd->name, data->built_ins[PWD],
-				ft_strlen(data->cmd->name) + 1) == 0)
+			ft_strlen(data->cmd->name) + 1) == 0)
 		pwd();
 	if (ft_strncmp(data->cmd->name, data->built_ins[EXPORT],
-				ft_strlen(data->cmd->name) + 1) == 0)
+			ft_strlen(data->cmd->name) + 1) == 0)
 		export(data);
 	if (ft_strncmp(data->cmd->name, data->built_ins[UNSET],
-				ft_strlen(data->cmd->name) + 1) == 0)
+			ft_strlen(data->cmd->name) + 1) == 0)
 		unset(data);
 	if (ft_strncmp(data->cmd->name, data->built_ins[ENV],
-				ft_strlen(data->cmd->name) + 1) == 0)
+			ft_strlen(data->cmd->name) + 1) == 0)
 		env(data);
 	if (ft_strncmp(data->cmd->name, data->built_ins[EXIT],
-				ft_strlen(data->cmd->name) + 1) == 0)
-		exit (EXIT_SUCCESS);
+			ft_strlen(data->cmd->name) + 1) == 0)
+		exit(EXIT_SUCCESS);
 }
 
 /* It checks if the string given corresponds to any of the strings
