@@ -13,6 +13,7 @@
 #include "list.h"
 #include "structs.h"
 #include <stdio.h>
+#include "pipex.h"
 
 void	env(t_data *data)
 {
