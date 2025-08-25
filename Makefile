@@ -13,11 +13,12 @@ SRCS		=	banner.c										\
 				main.c											\
 				list.c											\
 				pwd.c											\
+				signal_handler.c								\
 				structs.c										\
 				unset.c											\
 				pipex.c											\
 				parsing.c										\
-				parsing_utis.c										\
+				parsing_utis.c									\
 				freeing_pipes.c				
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

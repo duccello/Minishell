@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/25 11:35:26 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/25 15:44:21 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdlib.h>
+#include <signal.h>
+#include "signal_handler.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	*data;
 	char	*s;
+	struct sigaction sa;
 
+	sa.sa_handler = sig_handler;
+	sigaction(SIGINT, &sa, NULL);
 	(void)argc;
 	(void)argv;
 	banner();

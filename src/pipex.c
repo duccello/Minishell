@@ -6,21 +6,25 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:02:00 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/25 12:13:47 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/25 15:38:11 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "pipex.h"
 #include "built_in.h"
 #include "list.h"
+#include "signal_handler.h"
 
 int	exect_binary(int in, int out, char **argv, t_cmd *c)
 {
 	int		pid;
 	char	*path;
 
+	g_flag = 0;
 	pid = fork();
 	if (pid == 0)
 	{
+		g_flag = 1;
 		if (in != STDIN_FILENO)
 		{
 			dup2(in, STDIN_FILENO);
