@@ -12,11 +12,12 @@
 
 #include "list.h"
 #include "structs.h"
+#include "pipex.h"
 
-void	export(t_data *data, t_pipe *p)
+void	export(t_data *data, t_cmd *p)
 {
 	t_node	*node;
 
-	node = create_node(p->[1]);
+	node = create_node(p->argv[1]);
 	append_node(&data->envp, node);
 }

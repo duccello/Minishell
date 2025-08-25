@@ -15,12 +15,13 @@
 #include "list.h"
 #include "structs.h"
 #include <stdlib.h>
+#include "pipex.h"
 
-void	unset(t_data *data, t_pipes *p)
+void	unset(t_data *data, t_cmd *p)
 {
 	char	*s;
 
-	s = ft_strjoin(p->cmd[1], "=");
+	s = ft_strjoin(p->argv[1], "=");
 	delete_node(&data->envp, s);
 	if (s != NULL)
 		free(s);

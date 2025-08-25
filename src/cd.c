@@ -26,18 +26,18 @@ static int	handle_rel_path(char *s);
  *   responsible for the absolute path
  * - otherwise calls the function responsible for
  *   the relative path */
-int	cd(t_pipe *pipe)
+int	cd(t_cmd *cmd)
 {
-	if (pipe->cmd[1] == NULL)
+	if (cmd->argv[1] == NULL)
 		;
-	else if (pipe->cmd[1][0] == '/')
+	else if (cmd->argv[1][0] == '/')
 	{
-		if (handle_abs_path(pipe->cmd[1]) == -1)
+		if (handle_abs_path(cmd->argv[1]) == -1)
 			return (-1);
 	}
 	else
 	{
-		if (handle_rel_path(pipe->cmd[1]) == -1)
+		if (handle_rel_path(cmd->argv[1]) == -1)
 			return (-1);
 	}
 	return (0);

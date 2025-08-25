@@ -13,12 +13,9 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# define READ 0
-# define WRITE 1
-# define FALSE 0
-# define TRUE 1
 # include "get_next_line.h"
 # include "libft.h"
+# include "list.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -26,7 +23,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef struct s_pipe
+typedef struct s_cmd
 {
 	char	*infile;
 	int		in_fd;
@@ -35,31 +32,34 @@ typedef struct s_pipe
 	int		heredoc;
 	char	*limiter;
 	int		append;
-	char	**cmd;
+	char	**argv;
 	int		ind;
 	char	**paths;
 	char	**envp;
-}			t_pipe;
+	int		current_in;
+	int		current_out;
+}			t_cmd;
 
 typedef struct s_data
 {
 	char	**segments;
-	t_pipe	**pipes;
+	t_cmd	**cmds;
 	char	**built_ins;
 	int		amount;
+	t_node	*envp;
 }			t_data;
 
 char		**parse_path(char **envp);
-t_pipe		*parse_pipes(char *segment, char **envp);
-char		*joint_path(char *cmd, char **paths, t_pipe *c);
+t_cmd		*parse_cmds(char *segment, char **envp);
+char		*joint_path(char *cmd, char **paths, t_cmd *c);
 char		*path_start(char **envp);
-void		free_com(t_pipe *c);
-void		initiate_cmds(t_pipe *c, char **envp, char *segment);
-void		set_fds(t_pipe *c);
-int			count_things(char *input, char c);
+void		free_cmd(t_cmd *c);
+void		initiate_cmds(t_cmd *c, char **envp, char *segment);
+void		set_fds(t_cmd *c);
+int			char_counter(char *input, char c);
 void		free_array(char **c);
 t_data		*create_data(char *s, char **envp);
 void		free_everything(t_data *p);
-
+void		pipex(t_cmd **cmds, t_data *data, int i);
 
 #endif

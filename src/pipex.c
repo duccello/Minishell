@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 #include "pipex.h"
 #include "built_in.h"
+#include "list.h"
 
-int	exect_binary(int in, int out, char **cmd, t_pipe *c)
+int	exect_binary(int in, int out, char **argv, t_cmd *c)
 {
 	int		pid;
 	char	*path;
@@ -30,10 +31,10 @@ int	exect_binary(int in, int out, char **cmd, t_pipe *c)
 			dup2(out, STDOUT_FILENO);
 			close(out);
 		}
-		path = joint_path(cmd[0], c->paths, c);
+		path = joint_path(argv[0], c->paths, c);
 		if (!path)
 			exit(EXIT_FAILURE);
-		execve(path, cmd, c->envp);
+		execve(path, argv, c->envp);
 		perror("Error");
 		free(path);
 		exit(EXIT_FAILURE);
@@ -41,18 +42,16 @@ int	exect_binary(int in, int out, char **cmd, t_pipe *c)
 	return (pid);
 }
 
-void	pipex(t_pipe **cmds, t_data *data, int i)
+void	pipex(t_cmd **cmds, t_data *data, int i)
 {
-	int	pipfd[amount - 1][2];
+	int	pipfd[data->amount - 1][2];
 	int	status;
-	int	pids[amount];
-	int	current_in;
-	int	current_out;
+	int	pids[data->amount];
 
 	while (i < data->amount)
 		set_fds(cmds[i++]);
 	i = 0;
-	while (i < amount - 1)
+	while (i < data->amount - 1)
 	{
 		if (pipe(pipfd[i++]) == -1)
 		{
@@ -61,28 +60,28 @@ void	pipex(t_pipe **cmds, t_data *data, int i)
 		}
 	}
 	i = 0;
-	while (i < amount)
+	while (i < data->amount)
 	{
 		if (i == 0)
-			current_in = cmds[i]->in_fd;
+			cmds[i]->current_in = cmds[i]->in_fd;
 		else
-			current_in = pipfd[i - 1][0];
-		if (i == amount - 1)
-			current_out = cmds[i]->out_fd;
+			cmds[i]->current_in = pipfd[i - 1][0];
+		if (i == data->amount - 1)
+			cmds[i]->current_out = cmds[i]->out_fd;
 		else
-			current_out = pipfd[i][1];
-		if (cmd_is_built_in(cmds[i]->cmds[0], data->built_ins) == true)
+			cmds[i]->current_out = pipfd[i][1];
+		if (cmd_is_built_in(cmds[i]->argv[0], data->built_ins) == true)
 			handle_built_in(data, cmds[i]);
 		else
-			pids[i] = exect_binary(current_in, current_out, cmds[i]->cmd, cmds[i]);
+			pids[i] = exect_binary(cmds[i]->current_in, cmds[i]->current_out, cmds[i]->argv, cmds[i]);
 		if (i != 0)
 			close(pipfd[i - 1][0]);
-		if (i < amount - 1)
+		if (i < data->amount - 1)
 			close(pipfd[i][1]);
 		i++;
 	}
 	i = 0;
-	while (i < amount)
+	while (i < data->amount)
 		waitpid(pids[i++], &status, 0);
 }
 
@@ -97,19 +96,20 @@ t_data	*create_data(char *input, char **envp)
 		return (NULL);
 	p->segments = ft_split(input, '|');
 	p->amount = char_counter(input, '|') + 1;
-	p->pipes = malloc(p->amount * sizeof(t_pipe *));
-	if (p->pipes = NULL)
+	p->cmds = malloc(p->amount * sizeof(t_cmd *));
+	p->envp = create_list(envp);
+	if (p->cmds == NULL)
 	{
-		free_everything(p)
+		free_everything(p);
 		return (NULL);
 	}
 	p->built_ins = create_built_ins();
 	while (i < p->amount)
 	{
-		p->pipes[i] = parse_pipes(p->segments[i], envp);
+		p->cmds[i] = parse_cmds(p->segments[i], envp);
 		i++;
 	}
-	pipex(p->pipes, p->amount, p, 0);
+	pipex(p->cmds, p, 0);
 	free_everything(p);
 	return (p);
 }

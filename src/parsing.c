@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdbool.h>
 
 char	*path_start(char **envp)
 {
@@ -38,7 +39,7 @@ char	**parse_path(char **envp)
 	return (paths);
 }
 
-void	norminette_parse(char **chunks, t_pipe *c)
+void	norminette_parse(char **chunks, t_cmd *c)
 {
 	int	i;
 
@@ -52,34 +53,34 @@ void	norminette_parse(char **chunks, t_pipe *c)
 		else if (ft_strncmp(chunks[i], "<<", 3) == 0)
 		{
 			c->limiter = ft_strdup(chunks[++i]);
-			c->heredoc = TRUE;
+			c->heredoc = true;
 		}
 		else if (ft_strncmp(chunks[i], ">>", 3) == 0)
 		{
 			c->outfile = ft_strdup(chunks[++i]);
-			c->append = TRUE;
+			c->append = true;
 		}
 		else
-			c->cmd[c->ind++] = ft_strtrim(chunks[i], "\"\'");
+			c->argv[c->ind++] = ft_strtrim(chunks[i], "\"\'");
 		i++;
 	}
-	c->cmd[c->ind] = NULL;
+	c->argv[c->ind] = NULL;
 }
 
-t_pipe	*parse_pipes(char *segment, char **envp)
+t_cmd	*parse_cmds(char *segment, char **envp)
 {
-	t_pipe	*c;
+	t_cmd	*c;
 	char	**chunks;
 
 	chunks = ft_split(segment, ' ');
-	c = malloc(sizeof(t_pipe));
+	c = malloc(sizeof(t_cmd));
 	initiate_cmds(c, envp, segment);
 	norminette_parse(chunks, c);
 	free_array(chunks);
 	return (c);
 }
 
-char	*joint_path(char *cmd, char **paths, t_pipe *c)
+char	*joint_path(char *cmd, char **paths, t_cmd *c)
 {
 	char	*tmp;
 	char	*full;
@@ -88,7 +89,7 @@ char	*joint_path(char *cmd, char **paths, t_pipe *c)
 	i = 0;
 	if (cmd == NULL)
 	{
-		free_com(c);
+		free_cmd(c);
 		return (NULL);
 	}
 	if (ft_strchr(cmd, '/'))
@@ -102,7 +103,7 @@ char	*joint_path(char *cmd, char **paths, t_pipe *c)
 			return (full);
 		free(full);
 	}
-	free_com(c);
+	free_cmd(c);
 	unlink(c->outfile);
 	perror("access");
 	return (NULL);

@@ -9,9 +9,11 @@
 /*   Updated: 2025/08/25 11:44:07 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "get_next_line.h"
 #include "pipex.h"
+#include <stdbool.h>
 
-int	count_things(char *input, char c)
+int	char_counter(char *input, char c)
 {
 	int	i;
 	int	amount;
@@ -27,7 +29,7 @@ int	count_things(char *input, char c)
 	return (amount);
 }
 
-void	delimiter(t_pipe *c)
+void	delimiter(t_cmd *c)
 {
 	int		fd[2];
 	char	*line;
@@ -46,32 +48,32 @@ void	delimiter(t_pipe *c)
 	c->in_fd = fd[0];
 }
 
-void	initiate_cmds(t_pipe *c, char **envp, char *segment)
+void	initiate_cmds(t_cmd *c, char **envp, char *segment)
 {
 	c->infile = NULL;
 	c->outfile = NULL;
 	c->heredoc = 0;
 	c->limiter = NULL;
 	c->append = 0;
-	c->cmd = malloc((count_things(segment, ' ') + 1) * sizeof(char *));
+	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
 	c->ind = 0;
 	c->paths = parse_path(envp);
 	c->envp = envp;
 }
 
-void	set_fds(t_pipe *c)
+void	set_fds(t_cmd *c)
 {
-	if (c->infile != NULL && c->heredoc == FALSE)
+	if (c->infile != NULL && c->heredoc == false)
 		c->in_fd = open(c->infile, O_RDONLY);
-	else if (c->heredoc == TRUE)
+	else if (c->heredoc == true)
 	{
 		delimiter(c);
 	}
 	else
 		c->in_fd = STDIN_FILENO;
-	if (c->outfile != NULL && c->append == FALSE)
+	if (c->outfile != NULL && c->append == false)
 		c->out_fd = open(c->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (c->outfile != NULL && c->append == TRUE)
+	else if (c->outfile != NULL && c->append == true)
 		c->out_fd = open(c->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
 		c->out_fd = STDOUT_FILENO;

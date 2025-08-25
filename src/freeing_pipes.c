@@ -18,8 +18,8 @@ void	free_everything(t_data *p)
 
 	i = 0;
 	while (i < p->amount)
-		free_com(p->pipes[i++]);
-	free(p->pipes);
+		free_cmd(p->cmds[i++]);
+	free(p->cmds);
 	free_array(p->segments);
 	free(p);
 }
@@ -40,10 +40,10 @@ void	free_array(char **c)
 	c = NULL;
 }
 
-void	free_com(t_pipe *c)
+void	free_cmd(t_cmd *c)
 {
-	if (c->cmd != NULL)
-		free_array(c->cmd);
+	if (c->argv != NULL)
+		free_array(c->argv);
 	if (c->paths != NULL)
 		free_array(c->paths);
 	if (c->limiter != NULL)

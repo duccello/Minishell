@@ -18,28 +18,28 @@
 
 /* Wrapper that handles built-in commands.
  * It checks the name of the command and calls a function accordingly. */
-void	handle_built_in(t_data *data, t_pipe *pipe)
+void	handle_built_in(t_data *data, t_cmd *cmd)
 {
-	if (ft_strncmp(pipe->cmd[0], data->built_ins[ECHO],
-			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		echo(pipe);
-	if (ft_strncmp(pipe->cmd[0], data->built_ins[CD],
-			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		cd(pipe);
-	if (ft_strncmp(pipe->cmd[0], data->built_ins[PWD],
-			ft_strlen(pipe->cmd[0]) + 1) == 0)
+	if (ft_strncmp(cmd->argv[0], data->built_ins[ECHO],
+			ft_strlen(cmd->argv[0]) + 1) == 0)
+		echo(cmd);
+	if (ft_strncmp(cmd->argv[0], data->built_ins[CD],
+			ft_strlen(cmd->argv[0]) + 1) == 0)
+		cd(cmd);
+	if (ft_strncmp(cmd->argv[0], data->built_ins[PWD],
+			ft_strlen(cmd->argv[0]) + 1) == 0)
 		pwd();
-	if (ft_strncmp(pipe->cmd[0], data->built_ins[EXPORT],
-			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		export(data, pipe);
-	if (ft_strncmp(pipe->cmd[0], data->built_ins[UNSET],
-			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		unset(data, pipe);
-	if (ft_strncmp(pipe->cmd[0], data->built_ins[ENV],
-			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		env(data);
-	if (ft_strncmp(pipe->cmd[0], data->built_ins[EXIT],
-			ft_strlen(pipe->cmd[0]) + 1) == 0)
+	if (ft_strncmp(cmd->argv[0], data->built_ins[EXPORT],
+			ft_strlen(cmd->argv[0]) + 1) == 0)
+		export(data, cmd);
+	if (ft_strncmp(cmd->argv[0], data->built_ins[UNSET],
+			ft_strlen(cmd->argv[0]) + 1) == 0)
+		unset(data, cmd);
+	if (ft_strncmp(cmd->argv[0], data->built_ins[ENV],
+			ft_strlen(cmd->argv[0]) + 1) == 0)
+		env(data, cmd);
+	if (ft_strncmp(cmd->argv[0], data->built_ins[EXIT],
+			ft_strlen(cmd->argv[0]) + 1) == 0)
 		exit(EXIT_SUCCESS);
 }
 

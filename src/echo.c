@@ -15,12 +15,13 @@
 #include "structs.h"
 #include "macros.h"
 #include "pipex.h"
+#include "ft_fprintf.h"
 
-void	echo(t_pipe *p)
+void	echo(t_cmd *p)
 {
-	if (ft_strncmp(p->cmd[1], "-n",
-			ft_strlen(p->cmd[1]) + 1) == 0)
-		printf("%s", p->cmd[1]);
+	if (ft_strncmp(p->argv[1], "-n",
+			ft_strlen(p->argv[1]) + 1) == 0)
+		ft_fprintf(p->out_fd,"%s", p->argv[2]);
 	else
-		printf("%s\n", p->cmd[1]);
+		ft_fprintf(p->out_fd, "%s\n", p->argv[1]);
 }
