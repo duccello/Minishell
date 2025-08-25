@@ -22,19 +22,19 @@ void	handle_built_in(t_data *data, t_pipe *pipe)
 {
 	if (ft_strncmp(pipe->cmd[0], data->built_ins[ECHO],
 			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		echo(data);
+		echo(pipe);
 	if (ft_strncmp(pipe->cmd[0], data->built_ins[CD],
 			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		cd(data);
+		cd(pipe);
 	if (ft_strncmp(pipe->cmd[0], data->built_ins[PWD],
 			ft_strlen(pipe->cmd[0]) + 1) == 0)
 		pwd();
 	if (ft_strncmp(pipe->cmd[0], data->built_ins[EXPORT],
 			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		export(data);
+		export(data, pipe);
 	if (ft_strncmp(pipe->cmd[0], data->built_ins[UNSET],
 			ft_strlen(pipe->cmd[0]) + 1) == 0)
-		unset(data);
+		unset(data, pipe);
 	if (ft_strncmp(pipe->cmd[0], data->built_ins[ENV],
 			ft_strlen(pipe->cmd[0]) + 1) == 0)
 		env(data);
