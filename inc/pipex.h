@@ -60,6 +60,6 @@ int			char_counter(char *input, char c);
 void		free_array(char **c);
 t_data		*create_data(char *s, char **envp);
 void		free_everything(t_data *p);
-void		pipex(t_cmd **cmds, t_data *data, int i);
+void		execute_cmds(t_cmd **cmds, t_data *data);
 
 #endif

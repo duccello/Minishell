@@ -16,10 +16,11 @@ SRCS		=	banner.c										\
 				signal_handler.c								\
 				structs.c										\
 				unset.c											\
-				pipex.c											\
+				execute.c										\
 				parsing.c										\
 				parsing_utis.c									\
-				freeing_pipes.c				
+				freeing_pipes.c									\
+				create_data.c
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 LIBFT		=	-Llibft -lft
