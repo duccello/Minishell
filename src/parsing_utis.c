@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:08:42 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/24 17:09:14 by duccello         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:44:07 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -50,9 +50,9 @@ void	initiate_cmds(t_pipe *c, char **envp, char *segment)
 {
 	c->infile = NULL;
 	c->outfile = NULL;
-	c->heredoc = FALSE;
+	c->heredoc = 0;
 	c->limiter = NULL;
-	c->append = FALSE;
+	c->append = 0;
 	c->cmd = malloc((count_things(segment, ' ') + 1) * sizeof(char *));
 	c->ind = 0;
 	c->paths = parse_path(envp);

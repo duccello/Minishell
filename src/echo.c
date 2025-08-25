@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:24:36 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 16:24:18 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:23:39 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include "libft.h"
 #include "structs.h"
 #include "macros.h"
+#include "pipex.h"
 
-void	echo(t_data *data)
+void	echo(t_pipe *data)
 {
 	if (ft_strncmp(data->cmd->argv[1], "-n",
 			ft_strlen(data->cmd->argv[1]) + 1) == 0)

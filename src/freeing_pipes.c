@@ -6,13 +6,13 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:09:47 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/24 17:09:52 by duccello         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:14:57 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	free_everything(t_pipex *p)
+void	free_everything(t_data *p)
 {
 	int	i;
 

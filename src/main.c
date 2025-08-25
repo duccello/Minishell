@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 16:31:17 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:35:26 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,22 @@
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	*data;
+	char	*s;
 
 	(void)argc;
 	(void)argv;
 	banner();
-	data = create_data(envp);
 	while (1)
 	{
-		data->line = readline("> ");
-		if (data->line == NULL)
+		s = readline("> ");
+		if (s == NULL)
 			break ;
-		if (data->line[0] == '\0')
+		if (s[0] == '\0')
 			;
 		else
 		{
-			add_history(data->line);
-			data->cmd = create_cmd(data->line);
-			if (ft_strchr(data->line, '|') != NULL)
-				pipes(data->line, envp);
-			else if (cmd_is_built_in(data->cmd->argv[0],
-					data->built_ins) == true)
-				handle_built_in(data);
-			else
-				printf("ERROR: not a minishell built-in\n");
+			add_history(s);
+			data = create_data(s, envp);
 		}
 	}
 	// clean_all(data)

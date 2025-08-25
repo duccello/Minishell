@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/20 13:01:53 by duccello         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:02:46 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,6 @@ char	*joint_path(char *cmd, char **paths, t_pipe *c)
 	}
 	free_com(c);
 	unlink(c->outfile);
-	perror("Error");
+	perror("access");
 	return (NULL);
 }

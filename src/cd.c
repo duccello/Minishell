@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/22 14:26:26 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:23:13 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include "structs.h"
 #include "libft.h"
+#include "pipex.h"
 
 static int	handle_abs_path(char *s);
 static int	handle_rel_path(char *s);
@@ -25,18 +26,18 @@ static int	handle_rel_path(char *s);
  *   responsible for the absolute path
  * - otherwise calls the function responsible for
  *   the relative path */
-int	cd(t_data *data)
+int	cd(t_pipe *pipe)
 {
-	if (data->cmd->argv[1] == NULL)
+	if (pipe->cmd[1] == NULL)
 		;
-	else if (data->cmd->argv[1][0] == '/')
+	else if (pipe->cmd[1][0] == '/')
 	{
-		if (handle_abs_path(data->cmd->argv[1]) == -1)
+		if (handle_abs_path(pipe->cmd[1]) == -1)
 			return (-1);
 	}
 	else
 	{
-		if (handle_rel_path(data->cmd->argv[1]) == -1)
+		if (handle_rel_path(pipe->cmd[1]) == -1)
 			return (-1);
 	}
 	return (0);

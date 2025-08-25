@@ -6,12 +6,13 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:02:00 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/20 13:02:02 by duccello         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:13:47 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
+#include "built_in.h"
 
-int	piping(int in, int out, char **cmd, t_pipe *c)
+int	exect_binary(int in, int out, char **cmd, t_pipe *c)
 {
 	int		pid;
 	char	*path;
@@ -40,7 +41,7 @@ int	piping(int in, int out, char **cmd, t_pipe *c)
 	return (pid);
 }
 
-void	pipex(t_pipe **cmds, int amount, int i)
+void	pipex(t_pipe **cmds, t_data *data, int i)
 {
 	int	pipfd[amount - 1][2];
 	int	status;
@@ -48,7 +49,7 @@ void	pipex(t_pipe **cmds, int amount, int i)
 	int	current_in;
 	int	current_out;
 
-	while (i < amount)
+	while (i < data->amount)
 		set_fds(cmds[i++]);
 	i = 0;
 	while (i < amount - 1)
@@ -70,7 +71,10 @@ void	pipex(t_pipe **cmds, int amount, int i)
 			current_out = cmds[i]->out_fd;
 		else
 			current_out = pipfd[i][1];
-		pids[i] = piping(current_in, current_out, cmds[i]->cmd, cmds[i]);
+		if (cmd_is_built_in(cmds[i]->cmds[0], data->built_ins) == true)
+			handle_built_in(data, cmds[i]);
+		else
+			pids[i] = exect_binary(current_in, current_out, cmds[i]->cmd, cmds[i]);
 		if (i != 0)
 			close(pipfd[i - 1][0]);
 		if (i < amount - 1)
@@ -82,22 +86,30 @@ void	pipex(t_pipe **cmds, int amount, int i)
 		waitpid(pids[i++], &status, 0);
 }
 
-int	pipes(char *input, char **envp)
+t_data	*create_data(char *input, char **envp)
 {
-	t_pipex	*p;
+	t_data	*p;
 	int		i;
 
 	i = 0;
-	p = malloc(sizeof(t_pipex));
+	p = malloc(sizeof(t_data));
+	if (p == NULL)
+		return (NULL);
 	p->segments = ft_split(input, '|');
-	p->amount = count_things(input, '|') + 1;
+	p->amount = char_counter(input, '|') + 1;
 	p->pipes = malloc(p->amount * sizeof(t_pipe *));
+	if (p->pipes = NULL)
+	{
+		free_everything(p)
+		return (NULL);
+	}
+	p->built_ins = create_built_ins();
 	while (i < p->amount)
 	{
 		p->pipes[i] = parse_pipes(p->segments[i], envp);
 		i++;
 	}
-	pipex(p->pipes, p->amount, 0);
+	pipex(p->pipes, p->amount, p, 0);
 	free_everything(p);
-	return (0);
+	return (p);
 }
