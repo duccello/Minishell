@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/25 15:44:21 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:13:36 by duccello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include <stdlib.h>
 #include <signal.h>
 #include "signal_handler.h"
+#include <unistd.h>
+#include <stdio.h>
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -30,12 +32,15 @@ int	main(int argc, char *argv[], char *envp[])
 
 	sa.sa_handler = sig_handler;
 	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
 	(void)argc;
 	(void)argv;
 	banner();
 	while (1)
 	{
 		s = readline("> ");
+/*  		if (s[0] == '\0')
+			exit (0); */
 		if (s == NULL)
 			break ;
 		if (s[0] == '\0')
