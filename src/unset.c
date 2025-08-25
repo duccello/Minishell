@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:31:40 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 14:35:44 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:28:27 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include "structs.h"
 #include <stdlib.h>
 
-void	unset(t_data *data)
+void	unset(t_data *data, t_pipes *p)
 {
 	char	*s;
 
-	s = ft_strjoin(data->cmd->argv[1], "=");
+	s = ft_strjoin(p->cmd[1], "=");
 	delete_node(&data->envp, s);
 	if (s != NULL)
 		free(s);
