@@ -6,57 +6,36 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 13:28:19 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 11:53:47 by duccello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "data.h"
 #include "cmd.h"
-#include "parsing.h"
-#include <stdbool.h>
-#include "built_in.h"
-#include "utils.h"
-
-int	count_bins(t_data *data)
-{
-	int	i;
-	int	c;
-
-	i = 0;
-	c = 0;
-	while (i < data->amount)
-	{
-		if (cmd_is_built_in(data->cmds[i]->argv[0], data->built_ins) == true)
-			c++;
-		i++;
-	}
-	printf("built ins: %d\n", c);
-	return (data->amount - c);
-}
 
 t_data	*create_data(char *input, char **envp)
 {
-	t_data	*data;
+	t_data	*p;
 	int		i;
 
 	i = 0;
-	data = malloc(sizeof(t_data));
-	if (data == NULL)
+	p = malloc(sizeof(t_data));
+	if (p == NULL)
 		return (NULL);
-	data->segments = ft_split(input, '|');
-	data->amount = char_counter(input, '|') + 1;
-	data->cmds = malloc(data->amount * sizeof(t_cmd *));
-	data->envp = create_list(envp);
-	if (data->cmds == NULL)
+	p->segments = ft_split(input, '|');
+	p->amount = char_counter(input, '|') + 1;
+	p->cmds = malloc(p->amount * sizeof(t_cmd *));
+	p->envp = create_list(envp);
+	if (p->cmds == NULL)
 	{
-		free_everything(data);
+		free_everything(p);
 		return (NULL);
 	}
-	data->built_ins = create_built_ins();
-	while (i < data->amount)
+	p->built_ins = create_built_ins();
+	while (i < p->amount)
 	{
-		data->cmds[i] = parse_cmds(data->segments[i], envp);
+		p->cmds[i] = parse_cmds(p->segments[i], envp);
 		i++;
 	}
-	data->bins = count_bins(data);
-	return (data);
+	p->bins = count_bins(cmds, amount);
+	return (p);
 }
