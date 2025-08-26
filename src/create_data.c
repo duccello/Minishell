@@ -6,12 +6,11 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/25 17:21:02 by duccello         ###   ########.fr       */
+/*   Updated: 2025/08/26 11:53:47 by duccello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "built_in.h"
-#include "list.h"
-#include "pipex.h"
+#include "data.h"
+#include "cmd.h"
 
 t_data	*create_data(char *input, char **envp)
 {
@@ -37,7 +36,6 @@ t_data	*create_data(char *input, char **envp)
 		p->cmds[i] = parse_cmds(p->segments[i], envp);
 		i++;
 	}
-	execute_cmds(p->cmds, p);
-	free_everything(p);
+	p->bins = count_bins(cmds, amount);
 	return (p);
 }
