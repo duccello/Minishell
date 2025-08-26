@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:15:03 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/25 15:41:11 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:55:46 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 extern volatile sig_atomic_t	g_flag;
 
+void	handle_signals(void);
 void	sig_handler(int sig);
 
 #endif
