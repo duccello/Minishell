@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 14:57:54 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:14:44 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parse.h"
 #include <stdbool.h>
 #include "built_in.h"
+#include "clean.h"
 #include "utils.h"
 
 int	count_bins(t_data *data)

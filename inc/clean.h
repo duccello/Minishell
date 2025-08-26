@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   clean.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 15:06:26 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:11:07 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/26 15:09:43 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/26 15:14:57 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef CLEAN_H
+# define CLEAN_H
 
 # include "data.h"
 
-int		char_counter(char *input, char c);
+void	free_everything(t_data *p);
+void	free_data(t_data *p);
+void	free_cmd(t_cmd *c);
+void	free_array(char **c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:23:59 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:04:07 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:14:18 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	create_pipes(t_data *data)
 	{
 		if (pipe(data->pipfd[i++]) == -1)
 		{
-			perror("Pipes");
+			perror("pipe");
 			return ;
 		}
 	}
