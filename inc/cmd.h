@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef CMD_H
+# define CMD_H
 
 # include "get_next_line.h"
 # include "libft.h"
-# include "list.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,41 +24,26 @@
 
 typedef struct s_cmd
 {
-	char	*infile;
-	int		in_fd;
-	char	*outfile;
-	int		out_fd;
-	int		heredoc;
-	char	*limiter;
-	int		append;
-	char	**argv;
-	int		ind;
 	char	**paths;
 	char	**envp;
-	int		current_in;
-	int		current_out;
+	char	**argv;
+	char	*infile;
+	char	*outfile;
+	char	*limiter;
+	int		in_fd;
+	int		out_fd;
+	int		heredoc;
+	int		append;
 }			t_cmd;
 
-typedef struct s_data
-{
-	char	**segments;
-	t_cmd	**cmds;
-	char	**built_ins;
-	int		amount;
-	t_node	*envp;
-}			t_data;
-
-char		**parse_path(char **envp);
-t_cmd		*parse_cmds(char *segment, char **envp);
-char		*joint_path(char *cmd, char **paths, t_cmd *c);
-char		*path_start(char **envp);
-void		free_cmd(t_cmd *c);
 void		initiate_cmds(t_cmd *c, char **envp, char *segment);
+t_cmd		*parse_cmds(char *segment, char **envp);
+char		*path_start(char **envp);
+char		**parse_path(char **envp);
+char		*joint_path(char *cmd, char **paths, t_cmd *c);
 void		set_fds(t_cmd *c);
 int			char_counter(char *input, char c);
-void		free_array(char **c);
-t_data		*create_data(char *s, char **envp);
-void		free_everything(t_data *p);
 void		execute_cmds(t_cmd **cmds, t_data *data);
+void		free_cmd(t_cmd *c);
 
 #endif
