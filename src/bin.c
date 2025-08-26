@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:32:36 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:40:50 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 16:35:41 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 #include "clean.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
-int	exec_binary(int in, int out, char **argv, t_cmd *c)
+void	exec_binary(t_cmd *c)
 {
 	int		pid;
 	char	*path;
@@ -28,23 +29,24 @@ int	exec_binary(int in, int out, char **argv, t_cmd *c)
 	if (pid == 0)
 	{
 		g_flag = 1;
-		if (in != STDIN_FILENO)
+		if (c->current_in != STDIN_FILENO)
 		{
-			dup2(in, STDIN_FILENO);
-			close(in);
+			dup2(c->current_in, STDIN_FILENO);
+			close(c->current_in);
 		}
-		if (out != STDOUT_FILENO)
+		if (c->current_out != STDOUT_FILENO)
 		{
-			dup2(out, STDOUT_FILENO);
-			close(out);
+			dup2(c->current_out, STDOUT_FILENO);
+			close(c->current_out);
 		}
-		path = join_path(argv[0], c->paths, c);
-		execve(path, argv, c->envp);
+		path = join_path(c->argv[0], c->paths, c);
+		execve(path, c->argv, c->envp);
 		perror("execve");
 		free(path);
 		exit(EXIT_FAILURE);
 	}
-	return (pid);
+	else
+		wait(NULL);
 }
 
 char	*join_path(char *cmd, char **paths, t_cmd *c)

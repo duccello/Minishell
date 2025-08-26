@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:02:00 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 15:45:17 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 16:36:01 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,17 @@
 void	exec_cmd(t_cmd **cmds, t_data *data)
 {
 	int	i;
-	int	status;
-	int	*pids;
 
-	i = 0;
-	pids = NULL;
-	pids = malloc(data->bins * sizeof(int));
-	if (!*pids)
-		return ;
 	assign_in_out(cmds, data);
-	if (cmd_is_built_in(cmds[i]->argv[0], data->built_ins) == true)
-		handle_built_in(data, cmds[i]);
-	else
-		pids[i] = exec_binary(cmds[i]->current_in, cmds[i]->current_out,
-				cmds[i]->argv, cmds[i]);
 	i = 0;
 	while (i < data->amount)
-		waitpid(pids[i++], &status, 0);
-	free(pids);
+	{
+		if (cmd_is_built_in(cmds[i]->argv[0], data->built_ins) == true)
+			handle_built_in(data, cmds[i]);
+		else
+			exec_binary(cmds[i]);
+		i++;
+	}
 }
 
 void	assign_in_out(t_cmd **cmds, t_data *data)
