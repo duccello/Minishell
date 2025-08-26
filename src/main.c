@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/25 18:54:23 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 11:52:52 by duccello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			add_history(s);
 			data = create_data(s, envp);
+			create_pipes(t_data)
+/* 			execute_command(data);
+			free_everything(data); */
 		}
 	}
-	// clean_all(data)
 	return (0);
 }

@@ -72,52 +72,17 @@ void	separate_exc(t_cmd **cmds, t_data *data, int **pipfd, int *pids)
 	}
 }
 
-void	allocating_fds(int ***pipfd, int **pids, t_data *data)
-{
-	int	i;
-
-	i = 0;
-	*pipfd = malloc((data->amount - 1) * sizeof(int *));
-	if (!*pipfd)
-		return ;
-	while (i < data->amount - 1)
-	{
-		(*pipfd)[i] = malloc(2 * sizeof(int));
-		i++;
-	}
-	*pids = malloc(data->amount * sizeof(int));
-	if (!*pids)
-		return ;
-}
-
-void	create_pipes(t_data *data, int **pipfd)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->amount - 1)
-	{
-		if (pipe(pipfd[i++]) == -1)
-		{
-			perror("Pipes");
-			return ;
-		}
-	}
-}
 void	execute_cmds(t_cmd **cmds, t_data *data)
 {
 	int	i;
-	int	**pipfd;
 	int	status;
 	int	*pids;
 
 	i = 0;
-	pipfd = NULL;
 	pids = NULL;
-	while (i < data->amount)
-		set_fds(cmds[i++]);
-	allocating_fds(&pipfd, &pids, data);
-	create_pipes(data, pipfd);
+	pids = malloc(data->bins * sizeof(int));
+	if (!*pids)
+		return ;
 	separate_exc(cmds, data, pipfd, pids);
 	i = 0;
 	while (i < data->amount)

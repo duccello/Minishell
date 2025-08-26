@@ -39,11 +39,33 @@ char	**parse_path(char **envp)
 	return (paths);
 }
 
+
+void	delimiter(t_cmd *c)
+{
+	int		fd[2];
+	char	*line;
+
+	if (pipe(fd) == -1)
+		exit(1);
+	line = get_next_line(STDIN_FILENO);
+	while (line && ft_strncmp(line, c->limiter, ft_strlen(c->limiter)) != 0)
+	{
+		write(fd[1], line, ft_strlen(line));
+		free(line);
+		line = get_next_line(STDIN_FILENO);
+	}
+	free(line);
+	close(fd[1]);
+	c->in_fd = fd[0];
+}
+
 void	norminette_parse(char **chunks, t_cmd *c)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (chunks[i])
 	{
 		if (ft_strncmp(chunks[i], "<", 2) == 0)
@@ -61,10 +83,9 @@ void	norminette_parse(char **chunks, t_cmd *c)
 			c->append = true;
 		}
 		else
-			c->argv[c->ind++] = ft_strtrim(chunks[i], "\"\'");
-		i++;
+			c->argv[j++] = ft_strdup(chunks[i++]);
 	}
-	c->argv[c->ind] = NULL;
+	c->argv[j] = NULL;
 }
 
 t_cmd	*parse_cmds(char *segment, char **envp)
@@ -76,6 +97,7 @@ t_cmd	*parse_cmds(char *segment, char **envp)
 	c = malloc(sizeof(t_cmd));
 	initiate_cmds(c, envp, segment);
 	norminette_parse(chunks, c);
+	set_fds(c);
 	free_array(chunks);
 	return (c);
 }

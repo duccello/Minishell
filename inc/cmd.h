@@ -36,14 +36,8 @@ typedef struct s_cmd
 	int		append;
 }			t_cmd;
 
-void		initiate_cmds(t_cmd *c, char **envp, char *segment);
-t_cmd		*parse_cmds(char *segment, char **envp);
-char		*path_start(char **envp);
-char		**parse_path(char **envp);
-char		*joint_path(char *cmd, char **paths, t_cmd *c);
-void		set_fds(t_cmd *c);
-int			char_counter(char *input, char c);
 void		execute_cmds(t_cmd **cmds, t_data *data);
-void		free_cmd(t_cmd *c);
+void		set_fds(t_cmd *c);
+void		initiate_cmds(t_cmd *c, char **envp, char *segment);
 
 #endif

@@ -9,20 +9,8 @@
 /*   Updated: 2025/08/25 12:14:57 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "pipex.h"
-
-void	free_everything(t_data *p)
-{
-	int	i;
-
-	i = 0;
-	while (i < p->amount)
-		free_cmd(p->cmds[i++]);
-	free(p->cmds);
-	free_array(p->segments);
-	free(p);
-}
+#include "data.h"
+#include "cmd.h"
 
 void	free_array(char **c)
 {
@@ -53,4 +41,15 @@ void	free_cmd(t_cmd *c)
 	if (c->outfile != NULL)
 		free(c->outfile);
 	free(c);
+}
+void	free_everything(t_data *p)
+{
+	int	i;
+
+	i = 0;
+	while (i < p->amount)
+		free_cmd(p->cmds[i++]);
+	free(p->cmds);
+	free_array(p->segments);
+	free(p);
 }
