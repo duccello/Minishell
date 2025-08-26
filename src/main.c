@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 14:06:57 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:59:52 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "libft.h"
 #include "data.h"
 #include "signals.h"
+#include "exec.h"
+#include "clean.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <signal.h>
@@ -43,8 +45,8 @@ int	main(int argc, char *argv[], char *envp[])
 			add_history(s);
 			data = create_data(s, envp);
 			create_pipes(data);
-/* 			execute_command(data);
-			free_everything(data); */
+			exec_cmd(data->cmds, data);
+			free_everything(data);
 		}
 	}
 	return (0);

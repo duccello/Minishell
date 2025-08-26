@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:46:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:01:48 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:53:08 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,6 @@
 #include "utils.h"
 #include <unistd.h>
 #include "get_next_line.h"
-
-void	initiate_cmds(t_cmd *c, char **envp, char *segment)
-{
-	c->infile = NULL;
-	c->outfile = NULL;
-	c->heredoc = 0;
-	c->limiter = NULL;
-	c->append = 0;
-	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
-	c->paths = parse_path(envp);
-	c->envp = envp;
-}
 
 void	delimiter(t_cmd *c)
 {

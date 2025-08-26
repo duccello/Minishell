@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 15:05:43 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:56:23 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/26 15:37:40 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/26 15:45:33 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef EXEC_H
+# define EXEC_H
 
-#include "cmd.h"
+# include "cmd.h"
+# include "data.h"
 
-t_cmd	*parse_cmds(char *segment, char **envp);
-void	initiate_cmds(t_cmd *c, char **envp, char *segment);
-void	parse(char **chunks, t_cmd *c);
-char	**parse_path(char **envp);
-char	*path_start(char **envp);
+void	exec_cmd(t_cmd **cmds, t_data *data);
+void	assign_in_out(t_cmd **cmds, t_data *data);
 
 #endif

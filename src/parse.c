@@ -6,45 +6,47 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 15:15:23 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:56:43 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "cmd.h"
 #include "clean.h"
+#include "parse.h"
+#include "utils.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
 
-char	*path_start(char **envp)
+t_cmd	*parse_cmds(char *segment, char **envp)
 {
-	int	i;
+	t_cmd	*c;
+	char	**chunks;
 
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return ((envp[i] + 5));
-		i++;
-	}
-	return (NULL);
+	chunks = ft_split(segment, ' ');
+	c = malloc(sizeof(t_cmd));
+	initiate_cmds(c, envp, segment);
+	parse(chunks, c);
+	set_fds(c);
+	free_array(chunks);
+	return (c);
 }
 
-char	**parse_path(char **envp)
+void	initiate_cmds(t_cmd *c, char **envp, char *segment)
 {
-	char	**paths;
-	char	*start;
-
-	start = path_start(envp);
-	if (!start)
-		return (NULL);
-	paths = ft_split(start, ':');
-	return (paths);
+	c->infile = NULL;
+	c->outfile = NULL;
+	c->heredoc = 0;
+	c->limiter = NULL;
+	c->append = 0;
+	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
+	c->paths = parse_path(envp);
+	c->envp = envp;
 }
 
-void	norminette_parse(char **chunks, t_cmd *c)
+void	parse(char **chunks, t_cmd *c)
 {
 	int	i;
 	int	j;
@@ -73,45 +75,28 @@ void	norminette_parse(char **chunks, t_cmd *c)
 	c->argv[j] = NULL;
 }
 
-t_cmd	*parse_cmds(char *segment, char **envp)
+char	**parse_path(char **envp)
 {
-	t_cmd	*c;
-	char	**chunks;
+	char	**paths;
+	char	*start;
 
-	chunks = ft_split(segment, ' ');
-	c = malloc(sizeof(t_cmd));
-	initiate_cmds(c, envp, segment);
-	norminette_parse(chunks, c);
-	set_fds(c);
-	free_array(chunks);
-	return (c);
+	start = path_start(envp);
+	if (!start)
+		return (NULL);
+	paths = ft_split(start, ':');
+	return (paths);
 }
 
-char	*joint_path(char *cmd, char **paths, t_cmd *c)
+char	*path_start(char **envp)
 {
-	char	*tmp;
-	char	*full;
-	int		i;
+	int	i;
 
 	i = 0;
-	if (cmd == NULL)
+	while (envp[i])
 	{
-		free_cmd(c);
-		return (NULL);
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			return ((envp[i] + 5));
+		i++;
 	}
-	if (ft_strchr(cmd, '/'))
-		return (ft_strdup(cmd));
-	while (paths[i])
-	{
-		tmp = ft_strjoin(paths[i++], "/");
-		full = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(full, X_OK) == 0)
-			return (full);
-		free(full);
-	}
-	free_cmd(c);
-	unlink(c->outfile);
-	perror("access");
 	return (NULL);
 }

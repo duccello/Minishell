@@ -5,17 +5,18 @@ INCS		=	-Iinc											\
 SRC_DIR		=	src
 OBJ_DIR		=	build
 SRCS		=	banner.c										\
+				bin.c											\
 				built_in.c										\
 				cd.c											\
 				clean.c											\
 				data.c											\
 				echo.c											\
 				env.c											\
-				execute.c										\
+				exec.c											\
 				export.c										\
 				fd.c											\
-				main.c											\
 				list.c											\
+				main.c											\
 				parse.c											\
 				pipes.c											\
 				pwd.c											\

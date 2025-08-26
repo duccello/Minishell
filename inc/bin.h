@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   bin.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 15:05:43 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:56:23 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/26 15:34:49 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/26 15:35:59 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef BIN_H
+# define BIN_H
 
-#include "cmd.h"
+# include "cmd.h"
 
-t_cmd	*parse_cmds(char *segment, char **envp);
-void	initiate_cmds(t_cmd *c, char **envp, char *segment);
-void	parse(char **chunks, t_cmd *c);
-char	**parse_path(char **envp);
-char	*path_start(char **envp);
+int		exec_binary(int in, int out, char **argv, t_cmd *c);
+char	*join_path(char *cmd, char **paths, t_cmd *c);
 
 #endif
