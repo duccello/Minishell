@@ -45,8 +45,8 @@ int	main(int argc, char *argv[], char *envp[])
 			add_history(s);
 			data = create_data(s, envp);
 			create_pipes(data);
-/* 			execute_command(data);
-			free_everything(data); */
+			execute_cmds(data);
+			//free_everything(data); */
 		}
 	}
 	return (0);

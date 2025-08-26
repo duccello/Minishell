@@ -22,7 +22,7 @@
 void	handle_built_in(t_data *data, t_cmd *p);
 bool	cmd_is_built_in(char *s, char **built_ins);
 int		cd(t_cmd *p);
-void	pwd(void);
+void	pwd(t_cmd *p);
 void	echo(t_cmd *p);
 void	export(t_data *data, t_cmd *p);
 void	env(t_data *data, t_cmd *cmd);

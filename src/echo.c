@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
-#include "structs.h"
-#include "macros.h"
 #include "cmd.h"
 #include "ft_fprintf.h"
+#include "libft.h"
+#include "macros.h"
+#include "structs.h"
+#include <stdio.h>
 
 void	echo(t_cmd *p)
 {
@@ -25,8 +25,8 @@ void	echo(t_cmd *p)
 	{
 		if (p->argv[2] == NULL)
 			return ;
-		ft_fprintf(p->out_fd,"%s", p->argv[2]);
+		ft_fprintf(p->current_out, "%s", p->argv[2]);
 	}
 	else
-		ft_fprintf(p->out_fd, "%s\n", p->argv[1]);
+		ft_fprintf(p->current_out, "%s\n", p->argv[1]);
 }

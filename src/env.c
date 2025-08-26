@@ -24,7 +24,7 @@ void	env(t_data *data, t_cmd *cmd)
 	curr = data->envp;
 	while (curr != NULL)
 	{
-		ft_fprintf(cmd->out_fd, "%s\n", curr->s);
+		ft_fprintf(cmd->current_out, "%s\n", curr->s);
 		curr = curr->next;
 	}
 }

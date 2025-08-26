@@ -49,24 +49,22 @@ int	exect_binary(int in, int out, char **argv, t_cmd *c)
 void	separate_exc(t_cmd **cmds, t_data *data, int *pids)
 {
 	int	i;
-	int	current_in;
-	int	current_out;
 
 	i = 0;
 	while (i < data->amount)
 	{
 		if (i == 0)
-			current_in = cmds[i]->in_fd;
+			cmds[i]->current_in = cmds[i]->in_fd;
 		else
-			current_in = data->pipfd[i - 1][0];
+			cmds[i]->current_in = data->pipfd[i - 1][0];
 		if (i == data->amount - 1)
-			current_out = cmds[i]->out_fd;
+			cmds[i]->current_out = cmds[i]->out_fd;
 		else
-			current_out = data->pipfd[i][1];
+			cmds[i]->current_out = data->pipfd[i][1];
 		if (cmd_is_built_in(cmds[i]->argv[0], data->built_ins) == true)
 			handle_built_in(data, cmds[i]);
 		else
-			pids[i] = exect_binary(current_in, current_out, cmds[i]->argv,
+			pids[i] = exect_binary(cmds[i]->current_in, cmds[i]->current_out, cmds[i]->argv,
 					cmds[i]);
 		if (i != 0)
 			close(data->pipfd[i - 1][0]);
@@ -76,7 +74,7 @@ void	separate_exc(t_cmd **cmds, t_data *data, int *pids)
 	}
 }
 
-void	execute_cmds(t_cmd **cmds, t_data *data)
+void	execute_cmds(t_data *data)
 {
 	int	i;
 	int	status;
@@ -87,7 +85,7 @@ void	execute_cmds(t_cmd **cmds, t_data *data)
 	pids = malloc(data->bins * sizeof(int));
 	if (!*pids)
 		return ;
-	separate_exc(cmds, data, pids);
+	separate_exc(data->cmds, data, pids);
 	i = 0;
 	while (i < data->amount)
 		waitpid(pids[i++], &status, 0);

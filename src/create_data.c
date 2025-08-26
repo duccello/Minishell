@@ -9,12 +9,12 @@
 /*   Updated: 2025/08/26 13:28:19 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "data.h"
-#include "cmd.h"
-#include "parsing.h"
-#include <stdbool.h>
 #include "built_in.h"
+#include "cmd.h"
+#include "data.h"
+#include "parsing.h"
 #include "utils.h"
+#include <stdbool.h>
 
 int	count_bins(t_data *data)
 {
@@ -29,7 +29,6 @@ int	count_bins(t_data *data)
 			c++;
 		i++;
 	}
-	printf("built ins: %d\n", c);
 	return (data->amount - c);
 }
 
