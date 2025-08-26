@@ -1,3 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/26 13:46:10 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/26 15:01:48 by sgaspari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parse.h"
+#include "cmd.h"
+#include <stdbool.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include "utils.h"
+#include <unistd.h>
+#include "get_next_line.h"
+
 void	initiate_cmds(t_cmd *c, char **envp, char *segment)
 {
 	c->infile = NULL;
@@ -6,9 +27,27 @@ void	initiate_cmds(t_cmd *c, char **envp, char *segment)
 	c->limiter = NULL;
 	c->append = 0;
 	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
-	c->ind = 0;
 	c->paths = parse_path(envp);
 	c->envp = envp;
+}
+
+void	delimiter(t_cmd *c)
+{
+	int		fd[2];
+	char	*line;
+
+	if (pipe(fd) == -1)
+		exit(1);
+	line = get_next_line(STDIN_FILENO);
+	while (line && ft_strncmp(line, c->limiter, ft_strlen(c->limiter)) != 0)
+	{
+		write(fd[1], line, ft_strlen(line));
+		free(line);
+		line = get_next_line(STDIN_FILENO);
+	}
+	free(line);
+	close(fd[1]);
+	c->in_fd = fd[0];
 }
 
 void	set_fds(t_cmd *c)

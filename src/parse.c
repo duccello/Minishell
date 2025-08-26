@@ -1,15 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/25 11:02:46 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:03:17 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include "cmd.h"
+#include "utils.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 #include <stdbool.h>
 
 char	*path_start(char **envp)
@@ -36,26 +42,6 @@ char	**parse_path(char **envp)
 		return (NULL);
 	paths = ft_split(start, ':');
 	return (paths);
-}
-
-
-void	delimiter(t_cmd *c)
-{
-	int		fd[2];
-	char	*line;
-
-	if (pipe(fd) == -1)
-		exit(1);
-	line = get_next_line(STDIN_FILENO);
-	while (line && ft_strncmp(line, c->limiter, ft_strlen(c->limiter)) != 0)
-	{
-		write(fd[1], line, ft_strlen(line));
-		free(line);
-		line = get_next_line(STDIN_FILENO);
-	}
-	free(line);
-	close(fd[1]);
-	c->in_fd = fd[0];
 }
 
 void	norminette_parse(char **chunks, t_cmd *c)

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utis.c                                     :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/24 17:08:42 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/25 11:44:07 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/26 15:05:43 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/26 15:05:56 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	char_counter(char *input, char c)
-{
-	int	i;
-	int	amount;
+#ifndef PARSE_H
+# define PARSE_H
 
-	i = 0;
-	amount = 0;
-	while (input[i])
-	{
-		if (input[i] == c)
-			amount++;
-		i++;
-	}
-	return (amount);
-}
+#include "cmd.h"
 
+char	**parse_path(char **envp);
+char	*joint_path(char *cmd, char **paths, t_cmd *c);
+char	*path_start(char **envp);
+t_cmd	*parse_cmds(char *segment, char **envp);
 
+#endif

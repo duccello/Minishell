@@ -6,14 +6,13 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:46:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/23 14:41:14 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:07:17 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "list.h"
 #include "libft.h"
-#include "structs.h"
 #include "stddef.h"
 
 t_node	*create_list(char **arr)

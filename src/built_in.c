@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/25 12:12:45 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:24:46 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,23 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+char	**create_built_ins(void)
+{
+	char	**arr;
+
+	arr = malloc(sizeof(char *) * NUM_BUILT_INS + 1);
+	if (arr == NULL)
+		return (NULL);
+	arr[ECHO] = ft_strdup("echo");
+	arr[CD] = ft_strdup("cd");
+	arr[PWD] = ft_strdup("pwd");
+	arr[EXPORT] = ft_strdup("export");
+	arr[UNSET] = ft_strdup("unset");
+	arr[ENV] = ft_strdup("env");
+	arr[EXIT] = ft_strdup("exit");
+	arr[NUM_BUILT_INS] = NULL;
+	return (arr);
+}
 /* Wrapper that handles built-in commands.
  * It checks the name of the command and calls a function accordingly. */
 void	handle_built_in(t_data *data, t_cmd *cmd)
@@ -28,7 +45,7 @@ void	handle_built_in(t_data *data, t_cmd *cmd)
 		cd(cmd);
 	if (ft_strncmp(cmd->argv[0], data->built_ins[PWD],
 			ft_strlen(cmd->argv[0]) + 1) == 0)
-		pwd();
+		pwd(cmd);
 	if (ft_strncmp(cmd->argv[0], data->built_ins[EXPORT],
 			ft_strlen(cmd->argv[0]) + 1) == 0)
 		export(data, cmd);

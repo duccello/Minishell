@@ -6,17 +6,15 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 13:11:28 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:06:57 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "banner.h"
-#include "binary_exec.h"
 #include "built_in.h"
 #include "libft.h"
 #include "data.h"
-#include "signal_handler.h"
-#include "structs.h"
+#include "signals.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <signal.h>

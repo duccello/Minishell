@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:02:00 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/25 15:38:11 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:00:01 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
 #include "cmd.h"
 #include "data.h"
-#include "list.h"
-#include "parsing.h"
-#include "signal_handler.h"
+#include "parse.h"
+#include "signals.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/wait.h>
 
 int	exect_binary(int in, int out, char **argv, t_cmd *c)
 {

@@ -6,15 +6,12 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:31:40 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/25 12:28:27 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:31:03 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 #include "list.h"
-#include "structs.h"
-#include <stdlib.h>
 #include "data.h"
 #include "cmd.h"
 
