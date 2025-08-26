@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include "structs.h"
 #include "libft.h"
-#include "pipex.h"
+#include "cmd.h"
 
 static int	handle_abs_path(char *s);
 static int	handle_rel_path(char *s);

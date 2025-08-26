@@ -13,6 +13,7 @@
 #ifndef CMD_H
 # define CMD_H
 
+# include "data.h"
 # include "get_next_line.h"
 # include "libft.h"
 # include <fcntl.h>

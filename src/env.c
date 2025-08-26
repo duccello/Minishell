@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cmd.h"
+#include "data.h"
+#include "ft_fprintf.h"
 #include "list.h"
 #include "structs.h"
 #include <stdio.h>
-#include "pipex.h"
-#include "ft_fprintf.h"
 
 void	env(t_data *data, t_cmd *cmd)
 {
@@ -23,7 +24,7 @@ void	env(t_data *data, t_cmd *cmd)
 	curr = data->envp;
 	while (curr != NULL)
 	{
-		ft_fprintf(cmd->out_fd,"%s\n", curr->s);
+		ft_fprintf(cmd->out_fd, "%s\n", curr->s);
 		curr = curr->next;
 	}
 }

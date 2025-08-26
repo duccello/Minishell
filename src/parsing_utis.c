@@ -9,9 +9,6 @@
 /*   Updated: 2025/08/25 11:44:07 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
-#include "pipex.h"
-#include <stdbool.h>
 
 int	char_counter(char *input, char c)
 {

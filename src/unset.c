@@ -15,7 +15,8 @@
 #include "list.h"
 #include "structs.h"
 #include <stdlib.h>
-#include "pipex.h"
+#include "data.h"
+#include "cmd.h"
 
 void	unset(t_data *data, t_cmd *p)
 {

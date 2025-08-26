@@ -12,7 +12,8 @@
 
 #include "list.h"
 #include "structs.h"
-#include "pipex.h"
+#include "cmd.h"
+#include "data.h"
 
 void	export(t_data *data, t_cmd *p)
 {

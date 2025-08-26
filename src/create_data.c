@@ -11,31 +11,52 @@
 /* ************************************************************************** */
 #include "data.h"
 #include "cmd.h"
+#include "parsing.h"
+#include <stdbool.h>
+#include "built_in.h"
+#include "utils.h"
+
+int	count_bins(t_data *data)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	c = 0;
+	while (data->cmds[i])
+	{
+		if (cmd_is_built_in(data->cmds[i]->argv[0], data->built_ins) == true)
+			c++;
+		i++;
+	}
+	printf("built ins: %d\n", c);
+	return (data->amount - c);
+}
 
 t_data	*create_data(char *input, char **envp)
 {
-	t_data	*p;
+	t_data	*data;
 	int		i;
 
 	i = 0;
-	p = malloc(sizeof(t_data));
-	if (p == NULL)
+	data = malloc(sizeof(t_data));
+	if (data == NULL)
 		return (NULL);
-	p->segments = ft_split(input, '|');
-	p->amount = char_counter(input, '|') + 1;
-	p->cmds = malloc(p->amount * sizeof(t_cmd *));
-	p->envp = create_list(envp);
-	if (p->cmds == NULL)
+	data->segments = ft_split(input, '|');
+	data->amount = char_counter(input, '|') + 1;
+	data->cmds = malloc(data->amount * sizeof(t_cmd *));
+	data->envp = create_list(envp);
+	if (data->cmds == NULL)
 	{
-		free_everything(p);
+		free_everything(data);
 		return (NULL);
 	}
-	p->built_ins = create_built_ins();
-	while (i < p->amount)
+	data->built_ins = create_built_ins();
+	while (i < data->amount)
 	{
-		p->cmds[i] = parse_cmds(p->segments[i], envp);
+		data->cmds[i] = parse_cmds(data->segments[i], envp);
 		i++;
 	}
-	p->bins = count_bins(cmds, amount);
-	return (p);
+	data->bins = count_bins(data);
+	return (data);
 }

@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "structs.h"
 #include "macros.h"
-#include "pipex.h"
+#include "cmd.h"
 #include "ft_fprintf.h"
 
 void	echo(t_cmd *p)

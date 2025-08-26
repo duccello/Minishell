@@ -14,7 +14,7 @@
 #include "binary_exec.h"
 #include "built_in.h"
 #include "libft.h"
-#include "pipex.h"
+#include "data.h"
 #include "signal_handler.h"
 #include "structs.h"
 #include <readline/history.h>
@@ -44,7 +44,7 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			add_history(s);
 			data = create_data(s, envp);
-			create_pipes(t_data)
+			create_pipes(data);
 /* 			execute_command(data);
 			free_everything(data); */
 		}

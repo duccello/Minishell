@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "built_in.h"
+#include "cmd.h"
+#include "data.h"
 #include "list.h"
-#include "pipex.h"
+#include "parsing.h"
 #include "signal_handler.h"
 
 int	exect_binary(int in, int out, char **argv, t_cmd *c)
@@ -44,30 +46,32 @@ int	exect_binary(int in, int out, char **argv, t_cmd *c)
 	return (pid);
 }
 
-void	separate_exc(t_cmd **cmds, t_data *data, int **pipfd, int *pids)
+void	separate_exc(t_cmd **cmds, t_data *data, int *pids)
 {
 	int	i;
+	int	current_in;
+	int	current_out;
 
 	i = 0;
 	while (i < data->amount)
 	{
 		if (i == 0)
-			cmds[i]->current_in = cmds[i]->in_fd;
+			current_in = cmds[i]->in_fd;
 		else
-			cmds[i]->current_in = pipfd[i - 1][0];
+			current_in = data->pipfd[i - 1][0];
 		if (i == data->amount - 1)
-			cmds[i]->current_out = cmds[i]->out_fd;
+			current_out = cmds[i]->out_fd;
 		else
-			cmds[i]->current_out = pipfd[i][1];
+			current_out = data->pipfd[i][1];
 		if (cmd_is_built_in(cmds[i]->argv[0], data->built_ins) == true)
 			handle_built_in(data, cmds[i]);
 		else
-			pids[i] = exect_binary(cmds[i]->current_in, cmds[i]->current_out,
-					cmds[i]->argv, cmds[i]);
+			pids[i] = exect_binary(current_in, current_out, cmds[i]->argv,
+					cmds[i]);
 		if (i != 0)
-			close(pipfd[i - 1][0]);
+			close(data->pipfd[i - 1][0]);
 		if (i < data->amount - 1)
-			close(pipfd[i][1]);
+			close(data->pipfd[i][1]);
 		i++;
 	}
 }
@@ -83,13 +87,9 @@ void	execute_cmds(t_cmd **cmds, t_data *data)
 	pids = malloc(data->bins * sizeof(int));
 	if (!*pids)
 		return ;
-	separate_exc(cmds, data, pipfd, pids);
+	separate_exc(cmds, data, pids);
 	i = 0;
 	while (i < data->amount)
 		waitpid(pids[i++], &status, 0);
-	i = 0;
- 	while (i < data->amount - 1)
-		free(pipfd[i++]);
-	free(pipfd);
 	free(pids);
 }

@@ -42,14 +42,17 @@ void	free_cmd(t_cmd *c)
 		free(c->outfile);
 	free(c);
 }
-void	free_everything(t_data *p)
+void	free_everything(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (i < p->amount)
-		free_cmd(p->cmds[i++]);
-	free(p->cmds);
-	free_array(p->segments);
-	free(p);
+	while (i < data->amount)
+		free_cmd(data->cmds[i++]);
+	free(data->cmds);
+	free_array(data->segments);
+	free(data);
+	while (i < data->amount - 1)
+		free(data->pipfd[i++]);
+	free(data->pipfd);
 }

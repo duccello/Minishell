@@ -1,3 +1,6 @@
+#include "cmd.h"
+#include "data.h"
+
 void	allocating_fds(t_data *data)
 {
 	int	i;

@@ -13,9 +13,11 @@
 #ifndef BUILT_IN_H
 # define BUILT_IN_H
 
-# include "pipex.h"
+# include "data.h"
+# include "cmd.h"
 # include "structs.h"
 # include <stdbool.h>
+
 
 void	handle_built_in(t_data *data, t_cmd *p);
 bool	cmd_is_built_in(char *s, char **built_ins);

@@ -9,9 +9,11 @@
 /*   Updated: 2025/08/25 11:02:46 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "pipex.h"
+#include "get_next_line.h"
 #include <stdbool.h>
+#include "data.h"
+#include "cmd.h"
+#include "utils.h"
 
 char	*path_start(char **envp)
 {
@@ -37,26 +39,6 @@ char	**parse_path(char **envp)
 		return (NULL);
 	paths = ft_split(start, ':');
 	return (paths);
-}
-
-
-void	delimiter(t_cmd *c)
-{
-	int		fd[2];
-	char	*line;
-
-	if (pipe(fd) == -1)
-		exit(1);
-	line = get_next_line(STDIN_FILENO);
-	while (line && ft_strncmp(line, c->limiter, ft_strlen(c->limiter)) != 0)
-	{
-		write(fd[1], line, ft_strlen(line));
-		free(line);
-		line = get_next_line(STDIN_FILENO);
-	}
-	free(line);
-	close(fd[1]);
-	c->in_fd = fd[0];
 }
 
 void	norminette_parse(char **chunks, t_cmd *c)
@@ -86,6 +68,18 @@ void	norminette_parse(char **chunks, t_cmd *c)
 			c->argv[j++] = ft_strdup(chunks[i++]);
 	}
 	c->argv[j] = NULL;
+}
+
+void	initiate_cmds(t_cmd *c, char **envp, char *segment)
+{
+	c->infile = NULL;
+	c->outfile = NULL;
+	c->heredoc = 0;
+	c->limiter = NULL;
+	c->append = 0;
+	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
+	c->paths = parse_path(envp);
+	c->envp = envp;
 }
 
 t_cmd	*parse_cmds(char *segment, char **envp)

@@ -7,6 +7,9 @@ OBJ_DIR		=	build
 SRCS		=	banner.c										\
 				built_in.c										\
 				cd.c											\
+				create_data.c									\
+				create_pipes.c									\
+				freeing_data.c									\
 				echo.c											\
 				env.c											\
 				export.c										\
@@ -19,8 +22,7 @@ SRCS		=	banner.c										\
 				execute.c										\
 				parsing.c										\
 				parsing_utis.c									\
-				freeing_pipes.c									\
-				create_data.c
+				setfds.c
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 LIBFT		=	-Llibft -lft
