@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:02:00 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 16:36:01 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/27 13:10:03 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 void	exec_cmd(t_cmd **cmds, t_data *data)
 {
 	int	i;
+	int *pid;
 
+	pid = malloc(sizeof(int) * data->bins);
 	assign_in_out(cmds, data);
 	i = 0;
 	while (i < data->amount)

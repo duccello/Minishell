@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 15:56:43 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/27 13:04:02 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	initiate_cmds(t_cmd *c, char **envp, char *segment)
 	c->outfile = NULL;
 	c->heredoc = 0;
 	c->limiter = NULL;
+	c->cmd = NULL;
 	c->append = 0;
 	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
 	c->paths = parse_path(envp);
-	c->envp = envp;
+	//	c->envp = envp;
 }
 
 void	parse(char **chunks, t_cmd *c)
@@ -70,7 +71,12 @@ void	parse(char **chunks, t_cmd *c)
 			c->append = true;
 		}
 		else
-			c->argv[j++] = ft_strdup(chunks[i++]);
+		{
+			if (c->cmd	== NULL)
+				c->cmd = ft_strdup(chunks[i++]);
+			else
+				c->argv[j++] = ft_strdup(chunks[i++]);
+		}
 	}
 	c->argv[j] = NULL;
 }
