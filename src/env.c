@@ -14,15 +14,27 @@
 #include "data.h"
 #include "ft_fprintf.h"
 #include "list.h"
+#include <unistd.h>
 
 void	env(t_data *data, t_cmd *cmd)
 {
 	t_node	*curr;
 
 	curr = data->envp;
-	while (curr != NULL)
+	if (data->amount > 1)
 	{
-		ft_fprintf(cmd->current_out, "%s\n", curr->s);
-		curr = curr->next;
+		while (curr != NULL)
+		{
+			ft_fprintf(STDOUT_FILENO, "%s\n", curr->s);
+			curr = curr->next;
+		}
+	}
+	else
+	{
+		while (curr != NULL)
+		{
+			ft_fprintf(cmd->current_out, "%s\n", curr->s);
+			curr = curr->next;
+		}
 	}
 }

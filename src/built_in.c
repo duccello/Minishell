@@ -13,8 +13,11 @@
 #include "built_in.h"
 #include "libft.h"
 #include "macros.h"
+#include "signals.h"
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 char	**create_built_ins(void)
 {
@@ -37,26 +40,26 @@ char	**create_built_ins(void)
  * It checks the name of the command and calls a function accordingly. */
 void	handle_built_in(t_data *data, t_cmd *cmd)
 {
-	if (ft_strncmp(cmd->argv[0], data->built_ins[ECHO],
-			ft_strlen(cmd->argv[0]) + 1) == 0)
-		echo(cmd);
-	if (ft_strncmp(cmd->argv[0], data->built_ins[CD],
-			ft_strlen(cmd->argv[0]) + 1) == 0)
+	if (ft_strncmp(cmd->argv[0], data->built_ins[ECHO], ft_strlen(cmd->argv[0])
+			+ 1) == 0)
+		echo(data, cmd);
+	if (ft_strncmp(cmd->argv[0], data->built_ins[CD], ft_strlen(cmd->argv[0])
+			+ 1) == 0)
 		cd(cmd);
-	if (ft_strncmp(cmd->argv[0], data->built_ins[PWD],
-			ft_strlen(cmd->argv[0]) + 1) == 0)
-		pwd(cmd);
+	if (ft_strncmp(cmd->argv[0], data->built_ins[PWD], ft_strlen(cmd->argv[0])
+			+ 1) == 0)
+		pwd(data, cmd);
 	if (ft_strncmp(cmd->argv[0], data->built_ins[EXPORT],
 			ft_strlen(cmd->argv[0]) + 1) == 0)
 		export(data, cmd);
-	if (ft_strncmp(cmd->argv[0], data->built_ins[UNSET],
-			ft_strlen(cmd->argv[0]) + 1) == 0)
+	if (ft_strncmp(cmd->argv[0], data->built_ins[UNSET], ft_strlen(cmd->argv[0])
+			+ 1) == 0)
 		unset(data, cmd);
-	if (ft_strncmp(cmd->argv[0], data->built_ins[ENV],
-			ft_strlen(cmd->argv[0]) + 1) == 0)
+	if (ft_strncmp(cmd->argv[0], data->built_ins[ENV], ft_strlen(cmd->argv[0])
+			+ 1) == 0)
 		env(data, cmd);
-	if (ft_strncmp(cmd->argv[0], data->built_ins[EXIT],
-			ft_strlen(cmd->argv[0]) + 1) == 0)
+	if (ft_strncmp(cmd->argv[0], data->built_ins[EXIT], ft_strlen(cmd->argv[0])
+			+ 1) == 0)
 		exit(EXIT_SUCCESS);
 }
 
@@ -74,4 +77,29 @@ bool	cmd_is_built_in(char *s, char **built_ins)
 		i++;
 	}
 	return (false);
+}
+
+int	fork_built_in(t_data *data, t_cmd *cmd)
+{
+	int pid;
+
+	g_flag = 0;
+	pid = fork();
+	if (pid == 0)
+	{
+		g_flag = 1;
+		if (cmd->current_in != STDIN_FILENO)
+		{
+			dup2(cmd->current_in, STDIN_FILENO);
+			close(cmd->current_in);
+		}
+		if (cmd->current_out != STDOUT_FILENO)
+		{
+			dup2(cmd->current_out, STDOUT_FILENO);
+			close(cmd->current_out);
+		}
+		handle_built_in(data, cmd);
+		exit(EXIT_SUCCESS);
+	}
+	return (pid);
 }

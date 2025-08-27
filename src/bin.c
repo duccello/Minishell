@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "bin.h"
+#include "clean.h"
 #include "libft.h"
 #include "signals.h"
 #include <stdio.h>
-#include "bin.h"
-#include "clean.h"
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
-void	exec_binary(t_cmd *c)
+int	exec_binary(t_cmd *c)
 {
 	int		pid;
 	char	*path;
@@ -45,8 +45,7 @@ void	exec_binary(t_cmd *c)
 		free(path);
 		exit(EXIT_FAILURE);
 	}
-	else
-		wait(NULL);
+	return (pid);
 }
 
 char	*join_path(char *cmd, char **paths, t_cmd *c)
@@ -72,8 +71,6 @@ char	*join_path(char *cmd, char **paths, t_cmd *c)
 			return (full);
 		free(full);
 	}
-	free_cmd(c);
-	unlink(c->outfile);
 	perror("access");
 	return (NULL);
 }

@@ -40,13 +40,20 @@ void	initiate_cmds(t_cmd *c, char **envp, char *segment)
 	c->outfile = NULL;
 	c->heredoc = 0;
 	c->limiter = NULL;
-	c->cmd = NULL;
+	// c->cmd = NULL;
 	c->append = 0;
 	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
 	c->paths = parse_path(envp);
-	//	c->envp = envp;
+	c->envp = envp;
 }
+void	check_array(char **array)
+{
+	int i;
 
+	i = 0;
+	while (array[i])
+		printf("%s\n", array[i++]);
+}
 void	parse(char **chunks, t_cmd *c)
 {
 	int	i;
@@ -71,12 +78,8 @@ void	parse(char **chunks, t_cmd *c)
 			c->append = true;
 		}
 		else
-		{
-			if (c->cmd	== NULL)
-				c->cmd = ft_strdup(chunks[i++]);
-			else
-				c->argv[j++] = ft_strdup(chunks[i++]);
-		}
+			c->argv[j++] = ft_strdup(chunks[i]);
+		i++;
 	}
 	c->argv[j] = NULL;
 }

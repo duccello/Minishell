@@ -10,28 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data.h"
-#include "cmd.h"
-#include "parse.h"
-#include <stdbool.h>
 #include "built_in.h"
 #include "clean.h"
+#include "cmd.h"
+#include "data.h"
+#include "parse.h"
 #include "utils.h"
+#include <stdbool.h>
 
-int	count_bins(t_data *data)
+ void	count_cmds(t_data *data)
 {
 	int	i;
-	int	c;
 
 	i = 0;
-	c = 0;
 	while (i < data->amount)
 	{
-		if (cmd_is_built_in(data->cmds[i]->argv[0], data->built_ins) == true)
-			c++;
+		if (data->cmds[i]->argv[0] != NULL)
+			data->total_cmds++;
 		i++;
 	}
-	return (data->amount - c);
 }
 
 t_data	*create_data(char *input, char **envp)
@@ -58,6 +55,6 @@ t_data	*create_data(char *input, char **envp)
 		data->cmds[i] = parse_cmds(data->segments[i], envp);
 		i++;
 	}
-	data->bins = count_bins(data);
+	count_cmds(data);
 	return (data);
 }

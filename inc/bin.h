@@ -15,7 +15,7 @@
 
 # include "cmd.h"
 
-void	exec_binary(t_cmd *c);
+int	exec_binary(t_cmd *c);
 char	*join_path(char *cmd, char **paths, t_cmd *c);
 
 #endif

@@ -16,6 +16,7 @@ typedef struct s_data
 	t_node				*envp;
 	int					amount;
 	int					bins;
+	int					total_cmds;
 }						t_data;
 
 t_data					*create_data(char *s, char **envp);

@@ -13,18 +13,19 @@
 #ifndef BUILT_IN_H
 # define BUILT_IN_H
 
-# include "data.h"
 # include "cmd.h"
+# include "data.h"
 # include <stdbool.h>
 
 char	**create_built_ins(void);
 void	handle_built_in(t_data *data, t_cmd *p);
 bool	cmd_is_built_in(char *s, char **built_ins);
 int		cd(t_cmd *p);
-void	pwd(t_cmd *p);
-void	echo(t_cmd *p);
+void	pwd(t_data *data, t_cmd *p);
+void	echo(t_data *data, t_cmd *p);
 void	export(t_data *data, t_cmd *p);
 void	env(t_data *data, t_cmd *cmd);
 void	unset(t_data *data, t_cmd *p);
+int		fork_built_in(t_data *data, t_cmd *cmd);
 
 #endif
