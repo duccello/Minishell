@@ -12,6 +12,7 @@
 
 #include "parse.h"
 #include "cmd.h"
+#include "data.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -29,13 +30,13 @@ void	delimiter(t_cmd *c)
 	line = get_next_line(STDIN_FILENO);
 	while (line && ft_strncmp(line, c->limiter, ft_strlen(c->limiter)) != 0)
 	{
-		write(fd[1], line, ft_strlen(line));
+		write(fd[WRITE], line, ft_strlen(line));
 		free(line);
 		line = get_next_line(STDIN_FILENO);
 	}
 	free(line);
-	close(fd[1]);
-	c->in_fd = fd[0];
+	close(fd[WRITE]);
+	c->in_fd = fd[READ];
 }
 
 void	set_fds(t_cmd *c)

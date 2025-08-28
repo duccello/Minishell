@@ -15,39 +15,29 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void	allocating_fds(t_data *data)
+void	create_pipes(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	if (data->amount > 1)
 	{
-		data->pipfd = malloc((data->amount - 1) * sizeof(int *));
+		data->pipfd = malloc((data->amount - 1) * sizeof(int[2]));
 		if (!data->pipfd)
-			return ;
-		while (i < data->amount - 1)
 		{
-			data->pipfd[i] = malloc(2 * sizeof(int));
-			i++;
+			perror("pipe alloc");
+			return ;
 		}
 	}
 	else
 		data->pipfd = NULL;
-}
-
-void	create_pipes(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	allocating_fds(data);
 	if (data->pipfd != NULL)
 	{
 		while (i < data->amount - 1)
 		{
 			if (pipe(data->pipfd[i++]) == -1)
 			{
-				perror("pipe");
+				perror("pipe init");
 				return ;
 			}
 		}

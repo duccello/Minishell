@@ -13,7 +13,7 @@ typedef struct s_data
 	char				**segments;
 	t_cmd				**cmds;
 	char				**built_ins;
-	int					**pipfd;
+	int					(*pipfd)[2];
 	t_node				*envp;
 	int					amount;
 	int					bins;
