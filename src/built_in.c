@@ -36,6 +36,7 @@ char	**create_built_ins(void)
 	arr[NUM_BUILT_INS] = NULL;
 	return (arr);
 }
+
 /* Wrapper that handles built-in commands.
  * It checks the name of the command and calls a function accordingly. */
 void	handle_built_in(t_data *data, t_cmd *cmd)

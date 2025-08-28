@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "cmd.h"
 #include "clean.h"
+#include "cmd.h"
+#include "libft.h"
 #include "parse.h"
 #include "utils.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 t_cmd	*parse_cmds(char *segment, char **envp)
 {
@@ -46,14 +46,16 @@ void	initiate_cmds(t_cmd *c, char **envp, char *segment)
 	c->paths = parse_path(envp);
 	c->envp = envp;
 }
+
 void	check_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i])
 		printf("%s\n", array[i++]);
 }
+
 void	parse(char **chunks, t_cmd *c)
 {
 	int	i;

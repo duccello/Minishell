@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cmd.h"
 #include "ft_fprintf.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include "cmd.h"
 
 /* It calls getcwd(), prints its return value and then frees it. */
 void	pwd(t_cmd *cmd)
@@ -21,6 +21,6 @@ void	pwd(t_cmd *cmd)
 	char	*s;
 
 	s = getcwd(NULL, 0);
-		ft_fprintf(cmd->current_out, "%s\n", s);
+	ft_fprintf(cmd->current_out, "%s\n", s);
 	free(s);
 }

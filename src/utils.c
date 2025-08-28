@@ -25,5 +25,3 @@ int	char_counter(char *input, char c)
 	}
 	return (amount);
 }
-
-

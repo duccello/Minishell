@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data.h"
 #include "cmd.h"
+#include "data.h"
 
 void	free_array(char **c)
 {
@@ -43,6 +43,7 @@ void	free_cmd(t_cmd *c)
 		free(c->outfile);
 	free(c);
 }
+
 void	free_everything(t_data *p)
 {
 	int	i;

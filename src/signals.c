@@ -9,12 +9,12 @@
 /*   Updated: 2025/08/26 14:02:29 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "signals.h"
 #include <readline/readline.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "signals.h"
 
 volatile sig_atomic_t	g_flag;
 
@@ -32,8 +32,8 @@ void	sig_handler(int sig)
 	if (sig == 2)
 	{
 		if (g_flag == 1)
-			exit (0);
- 		else
+			exit(0);
+		else
 		{
 			write(1, "\n> ", 3);
 		}
@@ -41,7 +41,5 @@ void	sig_handler(int sig)
 	if (sig == 3)
 	{
 		readline("> ");
-		;
 	}
 }
-

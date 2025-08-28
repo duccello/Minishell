@@ -64,8 +64,8 @@ void	separate_exc(t_cmd **cmds, t_data *data, int *pids)
 		if (cmd_is_built_in(cmds[i]->argv[0], data->built_ins) == true)
 			handle_built_in(data, cmds[i]);
 		else
-			pids[i] = exect_binary(cmds[i]->current_in, cmds[i]->current_out, cmds[i]->argv,
-					cmds[i]);
+			pids[i] = exect_binary(cmds[i]->current_in, cmds[i]->current_out,
+					cmds[i]->argv, cmds[i]);
 		if (i != 0)
 			close(data->pipfd[i - 1][0]);
 		if (i < data->amount - 1)

@@ -41,7 +41,7 @@ void	exec_cmd(t_cmd **cmds, t_data *data)
 			handle_built_in(data, cmds[i]);
 		else
 			pid[j++] = exec_binary(cmds[i]);
- 		if (i != 0)
+		if (i != 0)
 			close(data->pipfd[i - 1][READ]);
 		if (i < data->amount - 1)
 			close(data->pipfd[i][WRITE]);
@@ -84,11 +84,11 @@ void	assign_in_out(t_cmd **cmds, t_data *data)
 		if (i == 0)
 			cmds[i]->current_in = cmds[i]->in_fd;
 		else
-			cmds[i]->current_in = data->pipfd[i - 1][0];
+			cmds[i]->current_in = data->pipfd[i - 1][READ];
 		if (i == data->amount - 1)
 			cmds[i]->current_out = cmds[i]->out_fd;
 		else
-			cmds[i]->current_out = data->pipfd[i][1];
+			cmds[i]->current_out = data->pipfd[i][WRITE];
 		i++;
 	}
 }
