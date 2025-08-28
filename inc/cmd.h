@@ -27,6 +27,8 @@ typedef struct s_cmd
 	int		out_fd;
 	int		heredoc;
 	int		append;
+	int		current_in;
+	int		current_out;
 }			t_cmd;
 
 void		execute_cmds(t_data *data);

@@ -45,13 +45,8 @@ int	main(int argc, char *argv[], char *envp[])
 			add_history(s);
 			data = create_data(s, envp);
 			create_pipes(data);
-<<<<<<< HEAD
 			exec_cmd(data->cmds, data);
 			free_everything(data);
-=======
-			execute_cmds(data);
-			//free_everything(data); */
->>>>>>> origin/dante
 		}
 	}
 	return (0);
