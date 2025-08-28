@@ -10,17 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+<<<<<<< HEAD
 #include "ft_fprintf.h"
+=======
+#include "cmd.h"
+#include "ft_fprintf.h"
+#include <stdio.h>
+>>>>>>> origin/dante
 #include <stdlib.h>
 #include <unistd.h>
 #include "cmd.h"
 
 /* It calls getcwd(), prints its return value and then frees it. */
+<<<<<<< HEAD
 void	pwd(t_cmd *cmd)
+=======
+void	pwd(t_cmd *p)
+>>>>>>> origin/dante
 {
 	char	*s;
 
 	s = getcwd(NULL, 0);
+<<<<<<< HEAD
 		ft_fprintf(cmd->current_out, "%s\n", s);
+=======
+	ft_fprintf(p->current_out, "%s\n", s);
+>>>>>>> origin/dante
 	free(s);
 }
