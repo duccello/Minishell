@@ -12,22 +12,27 @@
 
 #include "cmd.h"
 #include "data.h"
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void	allocating_fds(t_data *data)
 {
 	int	i;
 
-	data->pipfd = malloc((data->amount - 1) * sizeof(int *));
-	if (!data->pipfd)
-		return ;
 	i = 0;
-	while (i < data->amount - 1)
+	if (data->amount > 1)
 	{
-		data->pipfd[i] = malloc(2 * sizeof(int));
-		i++;
+		data->pipfd = malloc((data->amount - 1) * sizeof(int *));
+		if (!data->pipfd)
+			return ;
+		while (i < data->amount - 1)
+		{
+			data->pipfd[i] = malloc(2 * sizeof(int));
+			i++;
+		}
 	}
+	else
+		data->pipfd = NULL;
 }
 
 void	create_pipes(t_data *data)
@@ -35,13 +40,16 @@ void	create_pipes(t_data *data)
 	int	i;
 
 	i = 0;
-    allocating_fds(data);
-	while (i < data->amount - 1)
+	allocating_fds(data);
+	if (data->pipfd != NULL)
 	{
-		if (pipe(data->pipfd[i++]) == -1)
+		while (i < data->amount - 1)
 		{
-			perror("pipe");
-			return ;
+			if (pipe(data->pipfd[i++]) == -1)
+			{
+				perror("pipe");
+				return ;
+			}
 		}
 	}
 }

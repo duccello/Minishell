@@ -1,6 +1,7 @@
 #ifndef DATA_H
 # define DATA_H
-
+# define WRITE 1
+# define READ 0
 # include "libft.h"
 # include "list.h"
 # include <stdlib.h>
@@ -16,6 +17,7 @@ typedef struct s_data
 	t_node				*envp;
 	int					amount;
 	int					bins;
+	int					built_cmd;
 	int					total_cmds;
 }						t_data;
 

@@ -21,20 +21,9 @@ void	env(t_data *data, t_cmd *cmd)
 	t_node	*curr;
 
 	curr = data->envp;
-	if (data->amount > 1)
+	while (curr != NULL)
 	{
-		while (curr != NULL)
-		{
-			ft_fprintf(STDOUT_FILENO, "%s\n", curr->s);
-			curr = curr->next;
-		}
-	}
-	else
-	{
-		while (curr != NULL)
-		{
-			ft_fprintf(cmd->current_out, "%s\n", curr->s);
-			curr = curr->next;
-		}
+		ft_fprintf(cmd->current_out, "%s\n", curr->s);
+		curr = curr->next;
 	}
 }

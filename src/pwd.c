@@ -10,21 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
-#include "data.h"
 #include "ft_fprintf.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include "cmd.h"
 
 /* It calls getcwd(), prints its return value and then frees it. */
-void	pwd(t_data *data, t_cmd *p)
+void	pwd(t_cmd *cmd)
 {
 	char	*s;
 
 	s = getcwd(NULL, 0);
-	if (data->amount > 1)
-		ft_fprintf(STDOUT_FILENO, "%s\n", s);
-	else
-		ft_fprintf(p->current_out, "%s\n", s);
+		ft_fprintf(cmd->current_out, "%s\n", s);
 	free(s);
 }

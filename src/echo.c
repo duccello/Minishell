@@ -11,35 +11,20 @@
 /* ************************************************************************** */
 
 #include "cmd.h"
-#include "data.h"
 #include "ft_fprintf.h"
 #include "libft.h"
 #include <unistd.h>
 
-void	echo(t_data *data, t_cmd *p)
+void	echo(t_cmd *cmd)
 {
-	if (p->argv[1] == NULL)
+	if (cmd->argv[1] == NULL)
 		return ;
-	if (data->amount > 1)
+	if (ft_strncmp(cmd->argv[1], "-n", ft_strlen(cmd->argv[1]) + 1) == 0)
 	{
-		if (ft_strncmp(p->argv[1], "-n", ft_strlen(p->argv[1]) + 1) == 0)
-		{
-			if (p->argv[2] == NULL)
-				return ;
-			ft_fprintf(STDOUT_FILENO, "%s", p->argv[2]);
-		}
-		else
-			ft_fprintf(STDOUT_FILENO, "%s\n", p->argv[1]);
+		if (cmd->argv[2] == NULL)
+			return ;
+		ft_fprintf(cmd->current_out, "%s", cmd->argv[2]);
 	}
 	else
-	{
-		if (ft_strncmp(p->argv[1], "-n", ft_strlen(p->argv[1]) + 1) == 0)
-		{
-			if (p->argv[2] == NULL)
-				return ;
-			ft_fprintf(p->current_out, "%s", p->argv[2]);
-		}
-		else
-			ft_fprintf(p->current_out, "%s\n", p->argv[1]);
-	}
+		ft_fprintf(cmd->current_out, "%s\n", cmd->argv[1]);
 }

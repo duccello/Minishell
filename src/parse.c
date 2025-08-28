@@ -38,10 +38,10 @@ void	initiate_cmds(t_cmd *c, char **envp, char *segment)
 {
 	c->infile = NULL;
 	c->outfile = NULL;
-	c->heredoc = 0;
+	c->heredoc = false;
 	c->limiter = NULL;
 	// c->cmd = NULL;
-	c->append = 0;
+	c->append = false;
 	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
 	c->paths = parse_path(envp);
 	c->envp = envp;

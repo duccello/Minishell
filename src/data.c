@@ -18,17 +18,23 @@
 #include "utils.h"
 #include <stdbool.h>
 
- void	count_cmds(t_data *data)
+void	count_cmds(t_data *data)
 {
 	int	i;
 
 	i = 0;
+	data->total_cmds = 0;
+	data->built_cmd = 0;
+	data->bins = 0;
 	while (i < data->amount)
 	{
 		if (data->cmds[i]->argv[0] != NULL)
 			data->total_cmds++;
+		if (cmd_is_built_in(data->cmds[i]->argv[0], data->built_ins) == true)
+			data->built_cmd++;
 		i++;
 	}
+	data->bins = data->total_cmds - data->built_cmd;
 }
 
 t_data	*create_data(char *input, char **envp)
