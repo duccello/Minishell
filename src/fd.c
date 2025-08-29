@@ -6,11 +6,10 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:46:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:53:08 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/29 13:00:57 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
 #include "cmd.h"
 #include "data.h"
 #include <stdbool.h>
@@ -44,9 +43,7 @@ void	set_fds(t_cmd *c)
 	if (c->infile != NULL && c->heredoc == false)
 		c->in_fd = open(c->infile, O_RDONLY);
 	else if (c->heredoc == true)
-	{
 		delimiter(c);
-	}
 	else
 		c->in_fd = STDIN_FILENO;
 	if (c->outfile != NULL && c->append == false)

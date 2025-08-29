@@ -1,92 +1,83 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/27 13:04:02 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:59:24 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "clean.h"
+#include "data.h"
+#include "token.h"
 #include "cmd.h"
+#include "list.h"
 #include "libft.h"
-#include "parse.h"
 #include "utils.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-t_cmd	*parse_cmds(char *segment, char **envp)
+t_cmd	*parse_cmds(char *segment, t_data *data, char **envp)
 {
 	t_cmd	*c;
-	char	**chunks;
 
-	chunks = ft_split(segment, ' ');
 	c = malloc(sizeof(t_cmd));
-	initiate_cmds(c, envp, segment);
-	parse(chunks, c);
+	initiate_cmds(c, data, segment, envp);
+	parse(c);
 	set_fds(c);
-	free_array(chunks);
 	return (c);
 }
 
-void	initiate_cmds(t_cmd *c, char **envp, char *segment)
+void	initiate_cmds(t_cmd *c, t_data *data, char *segment, char **envp)
 {
+	c->data = data;
+	c->tokens = tokenize(segment, data, &(c->n_tokens));
+	c->argv = malloc(c->n_tokens * sizeof(char *));
+	c->envp = envp; // need to change this so it holds the updated env list
 	c->infile = NULL;
 	c->outfile = NULL;
 	c->heredoc = false;
 	c->limiter = NULL;
-	// c->cmd = NULL;
 	c->append = false;
-	c->argv = malloc((char_counter(segment, ' ') + 1) * sizeof(char *));
-	c->paths = parse_path(envp);
-	c->envp = envp;
+	c->paths = parse_path(c->data->envp);
 }
 
-void	check_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		printf("%s\n", array[i++]);
-}
-
-void	parse(char **chunks, t_cmd *c)
+void	parse(t_cmd *c)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (chunks[i])
+	while (i < c->n_tokens)
 	{
-		if (ft_strncmp(chunks[i], "<", 2) == 0)
-			c->infile = ft_strdup(chunks[++i]);
-		else if (ft_strncmp(chunks[i], ">", 2) == 0)
-			c->outfile = ft_strdup(chunks[++i]);
-		else if (ft_strncmp(chunks[i], "<<", 3) == 0)
+		if (ft_strncmp(c->tokens[i].s, "<", 2) == 0)
+			c->infile = ft_strdup(c->tokens[++i].s);
+		else if (ft_strncmp(c->tokens[i].s, ">", 2) == 0)
+			c->outfile = ft_strdup(c->tokens[++i].s);
+		else if (ft_strncmp(c->tokens[i].s, "<<", 3) == 0)
 		{
-			c->limiter = ft_strdup(chunks[++i]);
+			c->limiter = ft_strdup(c->tokens[++i].s);
 			c->heredoc = true;
 		}
-		else if (ft_strncmp(chunks[i], ">>", 3) == 0)
+		else if (ft_strncmp(c->tokens[i].s, ">>", 3) == 0)
 		{
-			c->outfile = ft_strdup(chunks[++i]);
+			c->outfile = ft_strdup(c->tokens[++i].s);
 			c->append = true;
 		}
 		else
-			c->argv[j++] = ft_strdup(chunks[i]);
+			c->argv[j++] = ft_strdup(c->tokens[i].s);
 		i++;
 	}
 	c->argv[j] = NULL;
 }
 
-char	**parse_path(char **envp)
+char	**parse_path(t_node *envp)
 {
 	char	**paths;
 	char	*start;
@@ -98,16 +89,16 @@ char	**parse_path(char **envp)
 	return (paths);
 }
 
-char	*path_start(char **envp)
+char	*path_start(t_node *envp)
 {
-	int	i;
+	t_node	*curr;
 
-	i = 0;
-	while (envp[i])
+	curr = envp;
+	while (curr != NULL)
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return ((envp[i] + 5));
-		i++;
+		if (ft_strncmp(curr->s, "PATH=", 5) == 0)
+			return (curr->s + 5);
+		curr = curr->next;
 	}
 	return (NULL);
 }
