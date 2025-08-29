@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:57:46 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 14:25:41 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/29 15:59:08 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ bool	cmd_is_built_in(char *s, char **built_ins);
 int		cd(t_cmd *p);
 void	pwd(void);
 void	echo(t_cmd *p);
-void	export(t_data *data, t_cmd *p);
+void	export(t_cmd *p);
 void	env(t_cmd *cmd);
-void	unset(t_data *data, t_cmd *p);
+void	unset(t_cmd *p);
 void	redirect(t_cmd *cmd);
-void	closing_pipes(t_cmd *cmd);
 
 #endif

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 13:31:40 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/29 15:58:35 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/29 14:42:23 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/29 15:20:24 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "list.h"
-#include "data.h"
-#include "cmd.h"
+#ifndef EXPAND_H
+# define EXPAND_H
 
-void	unset(t_cmd *p)
-{
-	char	*s;
+typedef struct s_tok t_tok;
 
-	s = ft_strjoin(p->argv[1], "=");
-	delete_node(&p->data->envp, s);
-	if (s != NULL)
-		free(s);
-}
+void	expand(t_tok *token);
+char	*expand_var(t_tok *token);
+
+#endif

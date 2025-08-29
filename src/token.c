@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:19:19 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/29 13:17:45 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/29 15:04:59 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,7 @@
 #include "cmd.h"
 #include "token.h"
 #include "libft.h"
-
-int		count_tokens(char *s, char **tracker);
-void	toggle_quotes(char c, bool *in_quote, bool *in_dquote);
-t_tok	populate_token(char **s, char **tracker);
-void	trim_spaces(t_tok *token);
-void	trim_quotes(t_tok *token);
+#include "expand.h"
 
 t_tok	*tokenize(char *s, t_data *data, int *n_tokens)
 {
@@ -30,7 +25,6 @@ t_tok	*tokenize(char *s, t_data *data, int *n_tokens)
 	char	*tracker;
 	int		i;
 
-	(void)data;
 	tracker = malloc(ft_strlen(s) + 1);
 	i = 0;
 	while (i < (int) ft_strlen(s))
@@ -44,8 +38,10 @@ t_tok	*tokenize(char *s, t_data *data, int *n_tokens)
 	while (i < *n_tokens)
 	{
 		tokens[i] = populate_token(&s, &tracker);
+		tokens[i].data = data;
 		trim_spaces(&tokens[i]);
 		trim_quotes(&tokens[i]);
+		expand(&tokens[i]);
 		i++;
 	}
 	return (tokens);
@@ -182,6 +178,7 @@ t_tok	populate_token(char **s, char **tracker)
 		(*tracker)++;
 	}
 	token.s = malloc(count + 1);
+	token.quote = false;
 	i = 0;
 	while (i < count)
 	{

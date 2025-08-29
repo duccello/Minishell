@@ -14,6 +14,7 @@ SRCS		=	banner.c										\
 				echo.c											\
 				env.c											\
 				exec.c											\
+				expand.c										\
 				export.c										\
 				fd.c											\
 				list.c											\
