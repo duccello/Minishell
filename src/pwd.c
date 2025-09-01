@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 12:39:54 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:04:41 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 13:49:43 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-/* It calls getcwd(), prints its return value and then frees it. */
 void	pwd(t_cmd *cmd)
 {
 	char	*s;

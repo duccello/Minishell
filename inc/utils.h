@@ -6,15 +6,16 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:06:26 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:11:07 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:32:06 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "data.h"
+typedef struct s_node t_node;
 
 int		char_counter(char *input, char c);
+char	**create_array(t_node *envp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/29 15:57:50 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 12:09:08 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ char	**create_built_ins(void)
 	return (arr);
 }
 
-/* Wrapper that handles built-in commands.
- * It checks the name of the command and calls a function accordingly. */
 void	handle_built_in(t_data *data, t_cmd *cmd)
 {
 	if (ft_strncmp(cmd->argv[0], data->built_ins[ECHO], ft_strlen(cmd->argv[0])
@@ -52,7 +50,7 @@ void	handle_built_in(t_data *data, t_cmd *cmd)
 		pwd();
 	if (ft_strncmp(cmd->argv[0], data->built_ins[EXPORT],
 			ft_strlen(cmd->argv[0]) + 1) == 0)
-		export(cmd);
+		ft_export(cmd);
 	if (ft_strncmp(cmd->argv[0], data->built_ins[UNSET], ft_strlen(cmd->argv[0])
 			+ 1) == 0)
 		unset(cmd);
@@ -61,11 +59,9 @@ void	handle_built_in(t_data *data, t_cmd *cmd)
 		env(cmd);
 	if (ft_strncmp(cmd->argv[0], data->built_ins[EXIT], ft_strlen(cmd->argv[0])
 			+ 1) == 0)
-		exit(EXIT_SUCCESS);
+		ft_exit(cmd);
 }
 
-/* It checks if the string given corresponds to any of the strings
- * predefined in the array. */
 bool	cmd_is_built_in(char *s, char **built_ins)
 {
 	size_t	i;

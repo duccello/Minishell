@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:46:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 14:07:17 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 13:28:23 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ void	append_node(t_node **list, t_node *node)
 	}
 }
 
-/* The third argument of the strncmp function is the length of
- * the string given, because I want that
- * ft_strncmp("NAME=value", "NAME=", strlen("NAME=")
- * returns 0 */
 void	delete_node(t_node **list, char *s)
 {
 	t_node	*curr;

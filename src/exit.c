@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 13:31:40 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/01 15:07:21 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/09/01 12:02:04 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/09/01 12:10:19 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include "libft.h"
-#include "list.h"
-#include "data.h"
-#include "cmd.h"
+#include "ft_fprintf.h"
+#include "built_in.h"
 
-void	unset(t_cmd *p)
+void	ft_exit(t_cmd *cmd)
 {
-	char	*s;
+	uint8_t	status;
 
-	//fix this
-	s = ft_strjoin(p->argv[1], "=");
-	if (s != NULL)
-		free(s);
-	delete_node(&p->data->envp, s);
+	ft_fprintf(cmd->current_out, "exit\n");
+	if (cmd->argv[1] == NULL)
+		exit (EXIT_SUCCESS);
+	else
+	{
+		status = (uint8_t) ft_atoi(cmd->argv[1]);
+		exit (status);
+	}
 }
