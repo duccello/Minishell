@@ -19,7 +19,6 @@ void	create_pipes(t_data *data)
 {
 	int	i;
 
-	i = 0;
 	if (data->amount > 1)
 	{
 		data->pipfd = malloc((data->amount - 1) * sizeof(int[2]));
@@ -31,6 +30,7 @@ void	create_pipes(t_data *data)
 	}
 	else
 		data->pipfd = NULL;
+	i = 0;
 	if (data->pipfd != NULL)
 	{
 		while (i < data->amount - 1)
