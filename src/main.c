@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/01 11:03:21 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:36:07 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char *argv[], char *envp[])
 		else
 		{
 			add_history(s);
-			init_data(data, s, envp);
+			init_data(data, s);
 			create_pipes(data);
 			exec_cmd(data->cmds, data);
 		}

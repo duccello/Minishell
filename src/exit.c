@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 15:06:26 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/01 11:32:06 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/09/01 12:02:04 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/09/01 12:10:19 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include "libft.h"
+#include "ft_fprintf.h"
+#include "built_in.h"
 
-typedef struct s_node t_node;
+void	ft_exit(t_cmd *cmd)
+{
+	uint8_t	status;
 
-int		char_counter(char *input, char c);
-char	**create_array(t_node *envp);
-
-#endif
+	ft_fprintf(cmd->current_out, "exit\n");
+	if (cmd->argv[1] == NULL)
+		exit (EXIT_SUCCESS);
+	else
+	{
+		status = (uint8_t) ft_atoi(cmd->argv[1]);
+		exit (status);
+	}
+}

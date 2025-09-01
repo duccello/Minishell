@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 16:07:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/29 13:39:28 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:35:11 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_cmd
 	int		n_tokens;
 }			t_cmd;
 
-t_cmd		*parse_cmds(char *segment, t_data *data, char **envp);
-void		initiate_cmds(t_cmd *c, t_data *data, char *segment, char **envp);
+t_cmd		*parse_cmds(char *segment, t_data *data);
+void		initiate_cmds(t_cmd *c, t_data *data, char *segment);
 void		parse(t_cmd *c);
 char		**parse_path(t_node *envp);
 char		*path_start(t_node *envp);

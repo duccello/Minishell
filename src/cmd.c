@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/29 12:59:24 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:34:57 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-t_cmd	*parse_cmds(char *segment, t_data *data, char **envp)
+t_cmd	*parse_cmds(char *segment, t_data *data)
 {
 	t_cmd	*c;
 
 	c = malloc(sizeof(t_cmd));
-	initiate_cmds(c, data, segment, envp);
+	initiate_cmds(c, data, segment);
 	parse(c);
 	set_fds(c);
 	return (c);
 }
 
-void	initiate_cmds(t_cmd *c, t_data *data, char *segment, char **envp)
+void	initiate_cmds(t_cmd *c, t_data *data, char *segment)
 {
 	c->data = data;
 	c->tokens = tokenize(segment, data, &(c->n_tokens));
 	c->argv = malloc(c->n_tokens * sizeof(char *));
-	c->envp = envp; // need to change this so it holds the updated env list
+	c->envp = create_array(data->envp);
 	c->infile = NULL;
 	c->outfile = NULL;
 	c->heredoc = false;

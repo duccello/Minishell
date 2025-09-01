@@ -6,9 +6,13 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:08:42 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 12:36:48 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:32:09 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
+#include "list.h"
+#include "libft.h"
 
 int	char_counter(char *input, char c)
 {
@@ -25,3 +29,33 @@ int	char_counter(char *input, char c)
 	}
 	return (amount);
 }
+
+char	**create_array(t_node *envp)
+{
+	char	**arr;
+	t_node	*curr;
+	int		len;
+	int		i;
+
+	len = 0;
+	curr = envp;
+	while (curr->next != NULL)
+	{
+		len++;
+		curr = curr->next;
+	}
+	arr = malloc(len + 1);
+	if (arr == NULL)
+		return (NULL);
+	curr = envp;
+	i = 0;
+	while (curr->next != NULL)
+	{
+		arr[i++] = ft_strdup(curr->s);
+		curr = curr->next;
+	}
+	arr[i] = NULL;
+	return (arr);
+}
+	
+	

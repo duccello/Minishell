@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/01 10:33:38 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:33:52 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_data	*create_data(char **envp)
 	return (data);
 }
 
-void	init_data(t_data *data, char *input, char **envp)
+void	init_data(t_data *data, char *input)
 {
 	int		i;
 
@@ -38,14 +38,11 @@ void	init_data(t_data *data, char *input, char **envp)
 	data->amount = char_counter(input, '|') + 1;
 	data->cmds = malloc(data->amount * sizeof(t_cmd *));
 	if (data->cmds == NULL)
-	{
-		free_everything(data);
 		return ;
-	}
 	i = 0;
 	while (i < data->amount)
 	{
-		data->cmds[i] = parse_cmds(data->segments[i], data, envp); 
+		data->cmds[i] = parse_cmds(data->segments[i], data); 
 		i++;
 	}
 	count_cmds(data);
