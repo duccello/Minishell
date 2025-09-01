@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:08:42 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/01 11:32:09 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:48:16 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ char	**create_array(t_node *envp)
 
 	len = 0;
 	curr = envp;
-	while (curr->next != NULL)
+	while (curr != NULL)
 	{
 		len++;
 		curr = curr->next;
 	}
-	arr = malloc(len + 1);
+	arr = malloc(sizeof(char *) *(len + 1));
 	if (arr == NULL)
 		return (NULL);
 	curr = envp;
 	i = 0;
-	while (curr->next != NULL)
+	while (curr != NULL)
 	{
 		arr[i++] = ft_strdup(curr->s);
 		curr = curr->next;
@@ -57,5 +57,3 @@ char	**create_array(t_node *envp)
 	arr[i] = NULL;
 	return (arr);
 }
-	
-	

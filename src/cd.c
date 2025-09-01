@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 13:58:50 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:24:19 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 #include <unistd.h>
 #include "libft.h"
 #include "cmd.h"
+#include "list.h"
+#include "libft.h"
+#include "built_in.h"
 
 static int	handle_abs_path(char *s);
 static int	handle_rel_path(char *s);
+static void	update_wd(t_node *list);
 
-/* It checks the second element of the argv array and:
- * - if it is NULL, the function does nothing
- * - if it starts with '/', it calls the function
- *   responsible for the absolute path
- * - otherwise calls the function responsible for
- *   the relative path */
 int	cd(t_cmd *cmd)
 {
 	if (cmd->argv[1] == NULL)
@@ -39,10 +37,10 @@ int	cd(t_cmd *cmd)
 		if (handle_rel_path(cmd->argv[1]) == -1)
 			return (-1);
 	}
+	update_wd(cmd->data->envp);
 	return (0);
 }
 
-/* It calls chdir() passing as parameter the string given. */
 static int	handle_abs_path(char *s)
 {
 	if (chdir(s) == -1)
@@ -53,9 +51,6 @@ static int	handle_abs_path(char *s)
 	return (0);
 }
 
-/* It appends the relative path to the current working directory
- * and passes the obtained string to chdir(). 
- * It also frees the two dynamically allocated strings. */
 static int	handle_rel_path(char *s)
 {
 	char	*cwd;
@@ -79,4 +74,16 @@ static int	handle_rel_path(char *s)
 	if (nd != NULL)
 		free(nd);
 	return (0);
+}
+
+static void	update_wd(t_node *list)
+{
+	t_node	*node;
+	char	*wd;
+
+	wd = ft_strdup("PWD=");
+	delete_node(&list, wd);
+	wd = ft_strjoin(wd, getcwd(NULL, 0));
+	node = create_node(wd);
+	append_node(&list, node);
 }
