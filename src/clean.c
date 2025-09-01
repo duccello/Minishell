@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:09:47 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 12:37:26 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/01 10:38:07 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	free_cmd(t_cmd *c)
 		free_array(c->argv);
 	if (c->paths != NULL)
 		free_array(c->paths);
-	//	if (c->envp != NULL)
-	//		free_array(c->envp); we will move this
 	if (c->limiter != NULL)
 		free(c->limiter);
 	if (c->infile != NULL)
@@ -56,7 +54,5 @@ void	free_everything(t_data *data)
 		free_cmd(data->cmds[i++]);
 	free(data->cmds);
 	free_array(data->segments);
-	free_array(data->built_ins); // not efficient
 	free(data->pipfd);
-	free(data);
 }

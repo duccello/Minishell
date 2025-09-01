@@ -21,9 +21,7 @@ typedef struct s_data
 	int					total_cmds;
 }						t_data;
 
-t_data					*create_data(char *s, char **envp);
-void					free_array(char **c);
-void					free_data(t_data *p);
-void					create_pipes(t_data *data);
+t_data					*create_data(char **envp);
+void					init_data(t_data *data, char *s, char **envp);
 
 #endif
