@@ -6,20 +6,24 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 16:07:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 14:57:30 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/29 13:39:28 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
 
-# include "data.h"
+typedef struct s_data	t_data;
+typedef struct s_tok	t_tok;
+typedef struct s_node	t_node;
 
 typedef struct s_cmd
 {
+	t_data	*data;
+	t_tok	*tokens;
 	char	**paths;
-	char	**envp;
 	char	**argv;
+	char	**envp;
 	char	*infile;
 	char	*outfile;
 	char	*limiter;
@@ -29,10 +33,14 @@ typedef struct s_cmd
 	int		append;
 	int		current_in;
 	int		current_out;
+	int		n_tokens;
 }			t_cmd;
 
-void		execute_cmds(t_data *data);
+t_cmd		*parse_cmds(char *segment, t_data *data, char **envp);
+void		initiate_cmds(t_cmd *c, t_data *data, char *segment, char **envp);
+void		parse(t_cmd *c);
+char		**parse_path(t_node *envp);
+char		*path_start(t_node *envp);
 void		set_fds(t_cmd *c);
-void		initiate_cmds(t_cmd *c, char **envp, char *segment);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/26 15:14:44 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/29 13:00:44 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "clean.h"
 #include "cmd.h"
 #include "data.h"
-#include "parse.h"
 #include "utils.h"
 #include <stdbool.h>
 
@@ -58,7 +57,7 @@ t_data	*create_data(char *input, char **envp)
 	data->built_ins = create_built_ins();
 	while (i < data->amount)
 	{
-		data->cmds[i] = parse_cmds(data->segments[i], envp);
+		data->cmds[i] = parse_cmds(data->segments[i], data, envp); //need to change envp to llist
 		i++;
 	}
 	count_cmds(data);

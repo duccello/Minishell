@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 17:57:46 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/29 15:59:08 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/29 11:08:49 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/29 14:58:49 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#ifndef TOKEN_H
+# define TOKEN_H
 
-# include "cmd.h"
-# include "data.h"
 # include <stdbool.h>
 
-char	**create_built_ins(void);
-void	handle_built_in(t_data *data, t_cmd *p);
-bool	cmd_is_built_in(char *s, char **built_ins);
-int		cd(t_cmd *p);
-void	pwd(void);
-void	echo(t_cmd *p);
-void	export(t_cmd *p);
-void	env(t_cmd *cmd);
-void	unset(t_cmd *p);
-void	redirect(t_cmd *cmd);
+typedef struct s_data t_data;
+
+typedef struct s_tok
+{
+	t_data	*data;
+	char	*s;
+	bool	quote;
+}	t_tok;
+
+t_tok	*tokenize(char *s, t_data *data, int *n_tokens);
+int		count_tokens(char *s, char **tracker);
+void	toggle_quotes(char c, bool *in_quote, bool *in_dquote);
+t_tok	populate_token(char **s, char **tracker);
+void	trim_spaces(t_tok *token);
+void	trim_quotes(t_tok *token);
 
 #endif

@@ -9,18 +9,20 @@ SRCS		=	banner.c										\
 				built_in.c										\
 				cd.c											\
 				clean.c											\
+				cmd.c											\
 				data.c											\
 				echo.c											\
 				env.c											\
 				exec.c											\
+				expand.c										\
 				export.c										\
 				fd.c											\
 				list.c											\
 				main.c											\
-				parse.c											\
 				pipes.c											\
 				pwd.c											\
 				signals.c										\
+				token.c											\
 				unset.c											\
 				utils.c
 SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(SRCS))

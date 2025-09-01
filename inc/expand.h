@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 15:05:43 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:56:23 by sgaspari         ###   ########.fr       */
+/*   Created: 2025/08/29 14:42:23 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/08/29 15:20:24 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef EXPAND_H
+# define EXPAND_H
 
-#include "cmd.h"
+typedef struct s_tok t_tok;
 
-t_cmd	*parse_cmds(char *segment, char **envp);
-void	initiate_cmds(t_cmd *c, char **envp, char *segment);
-void	parse(char **chunks, t_cmd *c);
-char	**parse_path(char **envp);
-char	*path_start(char **envp);
+void	expand(t_tok *token);
+char	*expand_var(t_tok *token);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:23:59 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/26 15:14:18 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:34:05 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	create_pipes(t_data *data)
 		data->pipfd = malloc((data->amount - 1) * sizeof(int[2]));
 		if (!data->pipfd)
 		{
-			perror("pipe alloc");
+			perror("malloc");
 			return ;
 		}
 	}
@@ -37,7 +37,7 @@ void	create_pipes(t_data *data)
 		{
 			if (pipe(data->pipfd[i++]) == -1)
 			{
-				perror("pipe init");
+				perror("pipe");
 				return ;
 			}
 		}
