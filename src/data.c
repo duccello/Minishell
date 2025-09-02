@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/01 11:33:52 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/02 14:59:29 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "data.h"
 #include "utils.h"
 #include <stdbool.h>
+
+#define WRONG false
 
 static void	count_cmds(t_data *data);
 
@@ -33,9 +35,14 @@ t_data	*create_data(char **envp)
 void	init_data(t_data *data, char *input)
 {
 	int		i;
+	bool	right_input;
 
-	data->segments = ft_split(input, '|');
-	data->amount = char_counter(input, '|') + 1;
+	right_input = split_segments(data, input);
+	if (input == WRONG)
+	{
+		ft_fprintf(STDERR_FILENO, "wrong input\n");
+		return ;
+	}
 	data->cmds = malloc(data->amount * sizeof(t_cmd *));
 	if (data->cmds == NULL)
 		return ;
