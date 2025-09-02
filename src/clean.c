@@ -24,7 +24,7 @@ void	free_array(char **c)
 		c[i] = NULL;
 		i++;
 	}
-	free(c[i]);
+	//free(c[i]);
 	free(c);
 	c = NULL;
 }
@@ -73,4 +73,8 @@ void	clean_data(t_data *data)
 		free(data->pipfd);
 		data->pipfd = NULL;
 	}
+	data->amount = 0;
+	data->bins = 0;
+	data->built_cmd = 0;
+	data->total_cmds = 0;
 }

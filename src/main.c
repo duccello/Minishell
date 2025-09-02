@@ -43,14 +43,14 @@ int	main(int argc, char *argv[], char *envp[])
 			exit(EXIT_SUCCESS); // free before
 		if (s[0] == '\0')
 			;
-		else
+		else if (check_input(s) == 1)
 		{
 			add_history(s);
 			init_data(data, s);
 			create_pipes(data);
 			exec_cmd(data->cmds, data);
+			clean_data(data);
 		}
-		//clean_data(data);
 	}
 	return (0);
 }

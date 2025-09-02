@@ -24,5 +24,6 @@ typedef struct s_data
 
 t_data					*create_data(char **envp);
 void					init_data(t_data *data, char *s);
+int						check_input(char *s);
 
 #endif

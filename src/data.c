@@ -23,6 +23,24 @@
 
 static void	count_cmds(t_data *data);
 
+int	check_input(char *s)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	c = 0;
+	while (s[i])
+	{
+		if (ft_isspace(s[i]) == 1)
+			c++;
+		i++;
+	}
+	if (i == c)
+		return (WRONG);
+	return (1);
+}
+
 t_data	*create_data(char **envp)
 {
 	t_data	*data;
