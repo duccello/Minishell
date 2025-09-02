@@ -12,12 +12,12 @@
 
 #include "banner.h"
 #include "built_in.h"
-#include "libft.h"
-#include "data.h"
-#include "signals.h"
-#include "exec.h"
 #include "clean.h"
+#include "data.h"
+#include "exec.h"
+#include "libft.h"
 #include "pipes.h"
+#include "signals.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <signal.h>
@@ -27,8 +27,8 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_data				*data;
-	char				*s;
+	t_data	*data;
+	char	*s;
 
 	(void)argc;
 	(void)argv;
@@ -37,9 +37,10 @@ int	main(int argc, char *argv[], char *envp[])
 	data = create_data(envp);
 	while (1)
 	{
+		g_flag = 0;
 		s = readline("> ");
 		if (s == NULL)
-			break ;
+			exit(EXIT_SUCCESS); // free before
 		if (s[0] == '\0')
 			;
 		else
@@ -49,6 +50,7 @@ int	main(int argc, char *argv[], char *envp[])
 			create_pipes(data);
 			exec_cmd(data->cmds, data);
 		}
+		clean_data(data);
 	}
 	return (0);
 }

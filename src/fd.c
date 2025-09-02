@@ -12,12 +12,12 @@
 
 #include "cmd.h"
 #include "data.h"
+#include "get_next_line.h"
+#include "utils.h"
+#include <fcntl.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include "utils.h"
 #include <unistd.h>
-#include "get_next_line.h"
 
 void	delimiter(t_cmd *c)
 {

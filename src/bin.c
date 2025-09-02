@@ -25,7 +25,6 @@ int	exec_binary(t_cmd *c)
 	int		pid;
 	char	*path;
 
-	g_flag = 0;
 	pid = fork();
 	if (pid == 0)
 	{

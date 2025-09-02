@@ -18,6 +18,6 @@
 extern volatile sig_atomic_t	g_flag;
 
 void	handle_signals(void);
-void	sig_handler(int sig);
+void	handle_sigint(int sig);
 
 #endif

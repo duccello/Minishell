@@ -15,7 +15,7 @@
 
 # include "data.h"
 
-void	free_everything(t_data *p);
+void	clean_data(t_data *p);
 void	free_data(t_data *p);
 void	free_cmd(t_cmd *c);
 void	free_array(char **c);
