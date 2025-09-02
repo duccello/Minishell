@@ -15,6 +15,7 @@
 #include "cmd.h"
 #include "data.h"
 #include "exec.h"
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -47,7 +48,7 @@ void	exec_cmd(t_cmd **cmds, t_data *data)
 			close(data->pipfd[i][WRITE]);
 		i++;
 	}
-	wait_pids(pid, j);
+	pids_and_ret(pid, j, data);
 }
 
 void	allocate_pids(t_data *data, int **pid)
@@ -58,7 +59,18 @@ void	allocate_pids(t_data *data, int **pid)
 		*pid = NULL;
 }
 
-void	wait_pids(int *pid, int j)
+uint8_t	get_return_val(int status)
+{
+	uint8_t	ret_val;
+
+	if ((status & 127) == 0)
+		ret_val = (status >> 8);
+	else
+		ret_val = 128 + (status & 127);
+	return (ret_val);
+}
+
+void	pids_and_ret(int *pid, int j, t_data *data)
 {
 	int	i;
 	int	status;
@@ -68,6 +80,7 @@ void	wait_pids(int *pid, int j)
 	{
 		while (i < j)
 			waitpid(pid[i++], &status, 0);
+		data->ret_val = get_return_val(status);
 		free(pid);
 	}
 	else

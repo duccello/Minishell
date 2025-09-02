@@ -13,7 +13,6 @@
 #include "cmd.h"
 #include "data.h"
 
-
 void	free_array(char **c)
 {
 	int	i;
@@ -37,22 +36,41 @@ void	free_cmd(t_cmd *c)
 	if (c->paths != NULL)
 		free_array(c->paths);
 	if (c->limiter != NULL)
+	{
 		free(c->limiter);
+		c->limiter = NULL;
+	}
 	if (c->infile != NULL)
+	{
 		free(c->infile);
+		c->infile = NULL;
+	}
 	if (c->outfile != NULL)
+	{
 		free(c->outfile);
+		c->outfile = NULL;
+	}
 	free(c);
+	c = NULL;
 }
 
-void	free_everything(t_data *data)
+void	clean_data(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->amount)
-		free_cmd(data->cmds[i++]);
-	free(data->cmds);
-	free_array(data->segments);
-	free(data->pipfd);
+	if (data->cmds != NULL)
+	{
+		while (i < data->amount)
+			free_cmd(data->cmds[i++]);
+		free(data->cmds);
+		data->cmds = NULL;
+	}
+	if (data->segments != NULL)
+		free_array(data->segments);
+	if (data->pipfd != NULL)
+	{
+		free(data->pipfd);
+		data->pipfd = NULL;
+	}
 }

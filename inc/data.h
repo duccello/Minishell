@@ -13,12 +13,13 @@ typedef struct s_data
 	char				**segments;
 	t_cmd				**cmds;
 	char				**built_ins;
-	int					(*pipfd)[2];
+	int 				(*pipfd)[2];
 	t_node				*envp;
 	int					amount;
 	int					bins;
 	int					built_cmd;
 	int					total_cmds;
+	int					ret_val;
 }						t_data;
 
 t_data					*create_data(char **envp);

@@ -18,7 +18,7 @@
 
 void	exec_cmd(t_cmd **cmds, t_data *data);
 void	assign_in_out(t_cmd **cmds, t_data *data);
-void	wait_pids(int *pid, int j);
+void	pids_and_ret(int *pid, int j, t_data *data);
 void	allocate_pids(t_data *data, int **pid);
 
 #endif

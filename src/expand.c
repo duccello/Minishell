@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdbool.h>
 #include "data.h"
+#include "expand.h"
 #include "libft.h"
 #include "list.h"
 #include "token.h"
-#include "expand.h"
+#include <stdbool.h>
+#include <stdio.h>
 
 void	expand(t_tok *token)
 {
@@ -27,8 +27,10 @@ void	expand(t_tok *token)
 	i = 0;
 	while (token->s[i] != '\0')
 	{
+		if (token->s[i] == '$' && token->s[i + 1] == '?')
+			token->s = ft_itoa(token->data->ret_val);
 		if (token->s[i] == '$' && token->s[i + 1] != '\0'
-				&& ft_isspace(token->s[i + 1]) == false)
+			&& ft_isspace(token->s[i + 1]) == false)
 			token->s = expand_var(token);
 		i++;
 	}
@@ -50,4 +52,3 @@ char	*expand_var(t_tok *token)
 	}
 	return (s);
 }
-
