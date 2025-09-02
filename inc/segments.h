@@ -15,7 +15,7 @@
 
 # include <stdbool.h>
 
-typedef structs s_data t_data;
+typedef struct s_data t_data;
 
 bool	split_segments(t_data *data, char *s);
 

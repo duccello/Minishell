@@ -14,9 +14,11 @@
 #include "clean.h"
 #include "cmd.h"
 #include "data.h"
+#include "ft_fprintf.h"
+#include "segments.h"
 #include "utils.h"
 #include <stdbool.h>
-
+#include <unistd.h>
 #define WRONG false
 
 static void	count_cmds(t_data *data);
@@ -24,6 +26,7 @@ static void	count_cmds(t_data *data);
 t_data	*create_data(char **envp)
 {
 	t_data	*data;
+
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (NULL);
@@ -38,6 +41,7 @@ void	init_data(t_data *data, char *input)
 	bool	right_input;
 
 	right_input = split_segments(data, input);
+	i = 0;
 	if (input == WRONG)
 	{
 		ft_fprintf(STDERR_FILENO, "wrong input\n");
@@ -49,7 +53,7 @@ void	init_data(t_data *data, char *input)
 	i = 0;
 	while (i < data->amount)
 	{
-		data->cmds[i] = parse_cmds(data->segments[i], data); 
+		data->cmds[i] = parse_cmds(data->segments[i], data);
 		i++;
 	}
 	count_cmds(data);
