@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:02:00 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/03 10:25:44 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 15:53:03 by duccello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "data.h"
 #include "exec.h"
 #include <stdint.h>
-#include <stdio.h>
+#include "ft_fprintf.h"
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -38,8 +38,8 @@ void	exec_cmd(t_cmd **cmds, t_data *data)
 	{
 		if (cmds[i]->argv[0] == NULL)
 		{
-			i++;
-			continue ;
+			ft_fprintf(STDERR_FILENO, "syntax error\n");
+			break ;
 		}
 		if (cmd_is_built_in(cmds[i]->argv[0], data->built_ins) == true)
 			handle_built_in(data, cmds[i]);

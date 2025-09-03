@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:46:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 10:26:14 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 15:53:45 by duccello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #define READ 0
 #define WRITE 1
@@ -49,12 +50,14 @@ void	set_fds(t_cmd *c)
 		delimiter(c);
 	else
 		c->in_fd = STDIN_FILENO;
+	if (c->in_fd == -1)
+		perror("open infile");
 	if (c->outfile != NULL && c->append == false)
 		c->out_fd = open(c->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (c->outfile != NULL && c->append == true)
 		c->out_fd = open(c->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
 		c->out_fd = STDOUT_FILENO;
-	if (c->in_fd == -1 || c->out_fd == -1)
-		exit(1);
+	if (c->out_fd == -1)
+		perror("open outfile");
 }

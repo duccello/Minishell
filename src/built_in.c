@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 11:54:48 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 15:50:12 by duccello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ void	handle_built_in(t_data *data, t_cmd *cmd)
 bool	cmd_is_built_in(char *s, char **built_ins)
 {
 	size_t	i;
-
+	
+	if (s == NULL)
+		return (false);
 	i = 0;
 	while (built_ins[i] != NULL)
 	{
