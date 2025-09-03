@@ -6,10 +6,11 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:08:42 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/01 14:48:16 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:22:48 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
 #include "libft.h"
@@ -44,7 +45,7 @@ char	**create_array(t_node *envp)
 		len++;
 		curr = curr->next;
 	}
-	arr = malloc(sizeof(char *) *(len + 1));
+	arr = malloc(sizeof(char *) * (len + 1));
 	if (arr == NULL)
 		return (NULL);
 	curr = envp;

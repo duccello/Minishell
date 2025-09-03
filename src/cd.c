@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 13:35:48 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 15:00:47 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	update_wd(t_node *list)
 	char	*wd;
 
 	wd = ft_strdup("PWD=");
-	delete_node(&list, wd);
+	delete_node(&list, wd, ft_strlen(wd));
 	wd = ft_strjoin(wd, getcwd(NULL, 0));
 	node = create_node(wd);
 	append_node(&list, node);

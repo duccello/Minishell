@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/03 11:49:36 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:29:59 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "utils.h"
 #include <stdbool.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #define CORRECT true
 #define WRONG false

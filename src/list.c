@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:46:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/01 13:28:23 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:59:11 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_node	*create_node(char *s)
 	node = malloc(sizeof(t_node));
 	if (node == NULL)
 		return (NULL);
-	node->s = s;
+	node->s = ft_strdup(s);
 	node->next = NULL;
 	return (node);
 }
@@ -57,7 +57,7 @@ void	append_node(t_node **list, t_node *node)
 	}
 }
 
-void	delete_node(t_node **list, char *s)
+void	delete_node(t_node **list, char *s, int len)
 {
 	t_node	*curr;
 	t_node	*prev;
@@ -66,7 +66,7 @@ void	delete_node(t_node **list, char *s)
 	curr = *list;
 	while (curr != NULL)
 	{
-		if (ft_strncmp(curr->s, s, ft_strlen(s)) == 0)
+		if (ft_strncmp(curr->s, s, len) == 0)
 		{
 			prev->next = curr->next;
 			free(curr);
