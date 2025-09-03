@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/01 12:09:08 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:54:48 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ char	**create_built_ins(void)
 
 void	handle_built_in(t_data *data, t_cmd *cmd)
 {
+	data->ret_val = 0;
 	if (ft_strncmp(cmd->argv[0], data->built_ins[ECHO], ft_strlen(cmd->argv[0])
 			+ 1) == 0)
 		echo(cmd);
 	if (ft_strncmp(cmd->argv[0], data->built_ins[CD], ft_strlen(cmd->argv[0])
 			+ 1) == 0)
-		cd(cmd);
+		data->ret_val = cd(cmd);
 	if (ft_strncmp(cmd->argv[0], data->built_ins[PWD],
 			ft_strlen(cmd->argv[0]) + 1) == 0)
 		pwd();

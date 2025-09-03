@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/03 11:05:01 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:49:36 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_data	*create_data(char **envp)
 		return (NULL);
 	data->envp = create_list(envp);
 	data->built_ins = create_built_ins();
+	data->ret_val = 0;
 	return (data);
 }
 
