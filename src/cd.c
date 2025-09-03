@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 17:49:22 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 11:46:05 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 13:35:48 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	cd(t_cmd *cmd)
 		;
 	else if (cmd->argv[1][0] == '/')
 	{
-		if (handle_abs_path(cmd->argv[1]) == -1)
+		if (handle_abs_path(cmd->argv[1]) == 1)
 			return (1);
 	}
 	else
 	{
-		if (handle_rel_path(cmd->argv[1]) == -1)
+		if (handle_rel_path(cmd->argv[1]) == 1)
 			return (1);
 	}
 	update_wd(cmd->data->envp);

@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/03 12:58:05 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 13:33:18 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,18 @@ void	parse(t_cmd *c)
 	j = 0;
 	while (i < c->n_tokens)
 	{
-		if (ft_strncmp(c->tokens[i].s, "<", 2) == 0
-				&& c->tokens[i].quote == false
-				&& c->tokens[i].dquote == false)
+		if (c->tokens[i].quote == true || c->tokens[i].dquote == true)
+			c->argv[j++] = ft_strdup(c->tokens[i].s);
+		else if (ft_strncmp(c->tokens[i].s, "<", 2) == 0)
 			c->infile = ft_strdup(c->tokens[++i].s);
-		else if (ft_strncmp(c->tokens[i].s, ">", 2) == 0
-				&& c->tokens[i].quote == false
-				&& c->tokens[i].dquote == false)
+		else if (ft_strncmp(c->tokens[i].s, ">", 2) == 0)
 			c->outfile = ft_strdup(c->tokens[++i].s);
-		else if (ft_strncmp(c->tokens[i].s, "<<", 3) == 0
-				&& c->tokens[i].quote == false
-				&& c->tokens[i].dquote == false)
+		else if (ft_strncmp(c->tokens[i].s, "<<", 3) == 0)
 		{
 			c->limiter = ft_strdup(c->tokens[++i].s);
 			c->heredoc = true;
 		}
-		else if (ft_strncmp(c->tokens[i].s, ">>", 3) == 0
-				&& c->tokens[i].quote == false
-				&& c->tokens[i].dquote == false)
+		else if (ft_strncmp(c->tokens[i].s, ">>", 3) == 0)
 		{
 			c->outfile = ft_strdup(c->tokens[++i].s);
 			c->append = true;
