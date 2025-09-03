@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 11:05:28 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 12:04:41 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int argc, char *argv[], char *envp[])
 	data = create_data(envp);
 	while (1)
 	{
-		g_flag = 0;
 		s = readline("> ");
 		if (s == NULL)
 			exit(EXIT_SUCCESS); // free before

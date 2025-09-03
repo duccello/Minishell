@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 11:08:49 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/29 14:58:49 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 12:46:06 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_tok
 	t_data	*data;
 	char	*s;
 	bool	quote;
+	bool	dquote;
 }	t_tok;
 
 t_tok	*tokenize(char *s, t_data *data, int *n_tokens);

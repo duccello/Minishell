@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:19:19 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/29 15:04:59 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 12:48:26 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_tok	*tokenize(char *s, t_data *data, int *n_tokens)
 	{
 		tokens[i] = populate_token(&s, &tracker);
 		tokens[i].data = data;
+		tokens[i].quote = false;
+		tokens[i].dquote = false;
 		trim_spaces(&tokens[i]);
 		trim_quotes(&tokens[i]);
 		expand(&tokens[i]);
@@ -59,6 +61,8 @@ void	trim_quotes(t_tok *token)
 	{
 		if (token->s[0] == '\'' && token->s[len - 1] == '\'')
 			token->quote = true;
+		if (token->s[0] == '"' && token->s[len - 1] == '"')
+			token->dquote = true;
 		len -= 2;
 		s = malloc(len + 1);
 		if (s == NULL)
