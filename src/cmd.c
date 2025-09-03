@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/03 15:09:31 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 15:42:59 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	parse(t_cmd *c)
 	j = 0;
 	while (i < c->n_tokens)
 	{
-		/*if (c->tokens[i].quote == true || c->tokens[i].dquote == true)
-			c->argv[j++] = ft_strdup(c->tokens[i].s);*/
-		/*else*/ if (ft_strncmp(c->tokens[i].s, "<", 2) == 0)
+		if (c->tokens[i].quote == true || c->tokens[i].dquote == true)
+			c->argv[j++] = ft_strdup(c->tokens[i].s);
+		else if (ft_strncmp(c->tokens[i].s, "<", 2) == 0)
 			c->infile = ft_strdup(c->tokens[++i].s);
 		else if (ft_strncmp(c->tokens[i].s, ">", 2) == 0)
 			c->outfile = ft_strdup(c->tokens[++i].s);
