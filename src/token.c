@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:19:19 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 13:20:36 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:50:38 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,16 +152,16 @@ void	toggle_quotes(char c, bool *in_quote, bool *in_dquote)
 {
 	if (c == '\'')
 	{
-		if (*in_quote == false)
+		if (*in_quote == false && *in_dquote == false)
 			*in_quote = true;
-		else
+		else if (*in_quote == true && *in_dquote == false)
 			*in_quote = false;
 	}
 	else if (c == '"')
 	{
-		if (*in_dquote == false)
+		if (*in_dquote == false && *in_quote == false)
 			*in_dquote = true;
-		else
+		else if (*in_dquote == true && *in_quote == false)
 			*in_dquote = false;
 	}
 }
