@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:02:00 by duccello          #+#    #+#             */
-/*   Updated: 2025/08/27 13:10:03 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 10:25:44 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
+#define READ 0
+#define WRITE 1
 
 void	exec_cmd(t_cmd **cmds, t_data *data)
 {

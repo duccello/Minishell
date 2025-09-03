@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/02 14:59:29 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:05:01 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,11 @@
 #include "utils.h"
 #include <stdbool.h>
 #include <unistd.h>
+
+#define CORRECT true
 #define WRONG false
 
 static void	count_cmds(t_data *data);
-
-int	check_input(char *s)
-{
-	int	i;
-	int	c;
-
-	i = 0;
-	c = 0;
-	while (s[i])
-	{
-		if (ft_isspace(s[i]) == 1)
-			c++;
-		i++;
-	}
-	if (i == c)
-		return (WRONG);
-	return (1);
-}
 
 t_data	*create_data(char **envp)
 {
@@ -51,6 +35,24 @@ t_data	*create_data(char **envp)
 	data->envp = create_list(envp);
 	data->built_ins = create_built_ins();
 	return (data);
+}
+
+bool	check_input(char *s)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	c = 0;
+	while (s[i])
+	{
+		if (ft_isspace(s[i]) == true)
+			c++;
+		i++;
+	}
+	if (i == c)
+		return (WRONG);
+	return (CORRECT);
 }
 
 void	init_data(t_data *data, char *input)

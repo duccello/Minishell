@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:55:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/01 11:36:07 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:05:28 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#define CORRECT true
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -43,7 +45,7 @@ int	main(int argc, char *argv[], char *envp[])
 			exit(EXIT_SUCCESS); // free before
 		if (s[0] == '\0')
 			;
-		else if (check_input(s) == 1)
+		else if (check_input(s) == CORRECT) 
 		{
 			add_history(s);
 			init_data(data, s);

@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:46:10 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/29 13:00:57 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/03 10:26:14 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#define READ 0
+#define WRITE 1
 
 void	delimiter(t_cmd *c)
 {
