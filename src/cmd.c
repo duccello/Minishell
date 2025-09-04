@@ -11,17 +11,18 @@
 /* ************************************************************************** */
 
 #include "clean.h"
-#include "data.h"
-#include "token.h"
 #include "cmd.h"
-#include "list.h"
+#include "data.h"
 #include "libft.h"
+#include "list.h"
+#include "token.h"
 #include "utils.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+static int	count_redirectors(t_cmd *c);
 t_cmd	*parse_cmds(char *segment, t_data *data)
 {
 	t_cmd	*c;
@@ -37,8 +38,8 @@ void	initiate_cmds(t_cmd *c, t_data *data, char *segment)
 {
 	c->data = data;
 	c->tokens = tokenize(segment, data, &(c->n_tokens));
-	c->n_redirectors = count_redirectors(c->tokens); //to implement
-	c->argv = malloc((c->n_tokens - c->redirectors) * sizeof(char *));
+	c->n_redirectors = count_redirectors(c);
+	c->argv = malloc((c->n_tokens - c->n_redirectors) * sizeof(char *));
 	if (c->argv == NULL)
 		return ;
 	c->envp = create_array(data->envp);
@@ -86,4 +87,27 @@ void	handle_append(char *s, t_cmd *c)
 {
 	c->outfile = ft_strdup(s);
 	c->append = true;
+}
+
+static int	count_redirectors(t_cmd *c)
+{
+	int i;
+	int redirectors;
+
+	i = 0;
+	redirectors = 0;
+	while (i < c->n_tokens)
+	{
+		if (c->tokens[i].quote == true || c->tokens[i].dquote == true)
+			;
+		else if (ft_strncmp(c->tokens[i].s, "<", 2) == 0
+			|| ft_strncmp(c->tokens[i].s, ">", 2) == 0
+			|| ft_strncmp(c->tokens[i].s, "<<", 3) == 0
+			|| ft_strncmp(c->tokens[i].s, ">>", 3) == 0)
+			redirectors++;
+		else
+			;
+		i++;
+	}
+	return (redirectors);
 }
