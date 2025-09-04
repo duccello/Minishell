@@ -79,7 +79,7 @@ int	init_data(t_data *data, char *input)
 		i++;
 	}
 	count_cmds(data);
-	g_flag = 0;
+//	g_flag = 0;
 	return (0);
 }
 

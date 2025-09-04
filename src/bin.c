@@ -13,8 +13,8 @@
 #include "bin.h"
 #include "clean.h"
 #include "libft.h"
-#include "signals.h"
 #include "list.h"
+#include "signals.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -26,9 +26,10 @@ int	exec_binary(t_cmd *c)
 	char	*path;
 
 	pid = fork();
-	g_flag = 1;
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		if (c->current_in != STDIN_FILENO)
 		{
 			dup2(c->current_in, STDIN_FILENO);
@@ -45,6 +46,8 @@ int	exec_binary(t_cmd *c)
 		free(path);
 		exit(EXIT_FAILURE);
 	}
+	else
+		g_flag = 1;
 	return (pid);
 }
 

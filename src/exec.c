@@ -15,8 +15,9 @@
 #include "cmd.h"
 #include "data.h"
 #include "exec.h"
-#include <stdint.h>
 #include "ft_fprintf.h"
+#include <signal.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -24,6 +25,7 @@
 #define READ 0
 #define WRITE 1
 
+extern volatile sig_atomic_t	g_flag;
 void	exec_cmd(t_cmd **cmds, t_data *data)
 {
 	int	i;
@@ -83,6 +85,7 @@ void	pids_and_ret(int *pid, int j, t_data *data)
 	{
 		while (i < j)
 			waitpid(pid[i++], &status, 0);
+		g_flag = 0;
 		data->ret_val = get_return_val(status);
 		free(pid);
 	}
