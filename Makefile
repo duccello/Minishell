@@ -20,6 +20,7 @@ SRCS		=	banner.c										\
 				fd.c											\
 				list.c											\
 				main.c											\
+				path.c											\
 				pipes.c											\
 				pwd.c											\
 				quotes.c										\

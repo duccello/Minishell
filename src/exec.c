@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:02:00 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/03 15:53:03 by duccello         ###   ########.fr       */
+/*   Updated: 2025/09/04 13:46:44 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #define WRITE 1
 
 extern volatile sig_atomic_t	g_flag;
+
 void	exec_cmd(t_cmd **cmds, t_data *data)
 {
 	int	i;

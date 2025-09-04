@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 16:07:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/01 11:35:11 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 13:45:59 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_cmd
 t_cmd		*parse_cmds(char *segment, t_data *data);
 void		initiate_cmds(t_cmd *c, t_data *data, char *segment);
 void		parse(t_cmd *c);
+void		handle_heredoc(char *s, t_cmd *c);
+void		handle_append(char *s, t_cmd *c);
 char		**parse_path(t_node *envp);
 char		*path_start(t_node *envp);
 void		set_fds(t_cmd *c);

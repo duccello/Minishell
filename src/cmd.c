@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/03 15:42:59 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 13:38:17 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,9 @@ void	parse(t_cmd *c)
 		else if (ft_strncmp(c->tokens[i].s, ">", 2) == 0)
 			c->outfile = ft_strdup(c->tokens[++i].s);
 		else if (ft_strncmp(c->tokens[i].s, "<<", 3) == 0)
-		{
-			c->limiter = ft_strdup(c->tokens[++i].s);
-			c->heredoc = true;
-		}
+			handle_heredoc(c->tokens[++i].s, c);
 		else if (ft_strncmp(c->tokens[i].s, ">>", 3) == 0)
-		{
-			c->outfile = ft_strdup(c->tokens[++i].s);
-			c->append = true;
-		}
+			handle_append(c->tokens[++i].s, c);
 		else
 			c->argv[j++] = ft_strdup(c->tokens[i].s);
 		i++;
@@ -81,28 +75,14 @@ void	parse(t_cmd *c)
 	c->argv[j] = NULL;
 }
 
-char	**parse_path(t_node *envp)
+void	handle_heredoc(char *s, t_cmd *c)
 {
-	char	**paths;
-	char	*start;
-
-	start = path_start(envp);
-	if (!start)
-		return (NULL);
-	paths = ft_split(start, ':');
-	return (paths);
+	c->limiter = ft_strdup(s);
+	c->heredoc = true;
 }
 
-char	*path_start(t_node *envp)
+void	handle_append(char *s, t_cmd *c)
 {
-	t_node	*curr;
-
-	curr = envp;
-	while (curr != NULL)
-	{
-		if (ft_strncmp(curr->s, "PATH=", 5) == 0)
-			return (curr->s + 5);
-		curr = curr->next;
-	}
-	return (NULL);
+	c->outfile = ft_strdup(s);
+	c->append = true;
 }
