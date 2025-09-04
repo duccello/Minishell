@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 13:30:23 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/08/29 15:38:14 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 16:53:06 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "list.h"
 #include "token.h"
+#include "utils.h"
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -31,7 +32,11 @@ void	expand(t_tok *token)
 			token->s = ft_itoa(token->data->ret_val);
 		if (token->s[i] == '$' && token->s[i + 1] != '\0'
 			&& ft_isspace(token->s[i + 1]) == false)
+		{
 			token->s = expand_var(token);
+			if (token->s == NULL)
+				token->s = "";
+		}
 		i++;
 	}
 }
@@ -40,14 +45,17 @@ char	*expand_var(t_tok *token)
 {
 	char	*s;
 	t_node	*curr;
-	int		key_len;
+	int		len_tok;
+	int		len_list;
 
-	key_len = (int)ft_strlen(token->s);
+	len_tok = ft_strlen(&token->s[1]);
 	curr = token->data->envp;
+	s = NULL;
 	while (curr != NULL)
 	{
-		if (ft_strncmp(curr->s, &(token->s[1]), key_len - 1) == 0)
-			s = ft_strdup(&(curr->s[key_len]));
+		len_list = find_equal(curr->s);
+		if (ft_strncmp(curr->s, &(token->s[1]), len_tok) == 0 && len_tok == len_list)
+			s = ft_strdup(&(curr->s[len_list + 1]));
 		curr = curr->next;
 	}
 	return (s);

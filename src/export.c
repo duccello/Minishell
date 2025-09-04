@@ -6,18 +6,18 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:48:38 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 15:02:56 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 16:23:06 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 #include "data.h"
 #include "list.h"
+#include "utils.h"
 #include <stdbool.h>
 #include <stdio.h>
 
 static bool	is_var_dup(char *s, t_node *list);
-static int	find_equal(char *s);
 
 void	ft_export(t_cmd *p)
 {
@@ -49,16 +49,3 @@ static bool	is_var_dup(char *s, t_node *list)
 	return (false);
 }
 
-static int	find_equal(char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len] != '\0')
-	{
-		if (s[len] == '=')
-			return (len);
-		len++;
-	}
-	return (-1);
-}

@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:08:42 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/04 10:26:57 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 16:22:59 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,18 @@ char	**create_array(t_node *envp)
 	}
 	arr[i] = NULL;
 	return (arr);
+}
+
+int	find_equal(char *s)
+{
+	int	len;
+
+	len = 0;
+	while (s[len] != '\0')
+	{
+		if (s[len] == '=')
+			return (len);
+		len++;
+	}
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:06:26 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/01 11:32:06 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 16:21:23 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ typedef struct s_node t_node;
 
 int		char_counter(char *input, char c);
 char	**create_array(t_node *envp);
+int		find_equal(char *s);
 
 #endif
