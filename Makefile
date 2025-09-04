@@ -22,6 +22,7 @@ SRCS		=	banner.c										\
 				main.c											\
 				pipes.c											\
 				pwd.c											\
+				quotes.c										\
 				segments.c										\
 				signals.c										\
 				token.c											\

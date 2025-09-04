@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/03 14:29:59 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 10:41:11 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdio.h>
-
-#define CORRECT true
-#define WRONG false
 
 static void	count_cmds(t_data *data);
 
@@ -53,25 +50,25 @@ bool	check_input(char *s)
 		i++;
 	}
 	if (i == c)
-		return (WRONG);
-	return (CORRECT);
+		return (false);
+	return (true);
 }
 
-void	init_data(t_data *data, char *input)
+int		init_data(t_data *data, char *input)
 {
 	int		i;
-	bool	right_input;
+	bool	input_correct;
 
-	right_input = split_segments(data, input);
+	input_correct = split_segments(data, input);
 	i = 0;
-	if (input == WRONG)
+	if (input_correct == false)
 	{
 		ft_fprintf(STDERR_FILENO, "wrong input\n");
-		return ;
+		return (1);
 	}
 	data->cmds = malloc(data->amount * sizeof(t_cmd *));
 	if (data->cmds == NULL)
-		return ;
+		return (1);
 	i = 0;
 	while (i < data->amount)
 	{
@@ -79,6 +76,7 @@ void	init_data(t_data *data, char *input)
 		i++;
 	}
 	count_cmds(data);
+	return (0);
 }
 
 static void	count_cmds(t_data *data)

@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   segments.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/04 10:22:05 by sgaspari          #+#    #+#             */
+/*   Updated: 2025/09/04 10:38:29 by sgaspari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "data.h"
 #include "segments.h"
+#include "quotes.h"
 #include "token.h"
 #include <stdbool.h>
 #include <stdlib.h>
@@ -23,6 +36,8 @@ bool	split_segments(t_data *data, char *s)
 	{
 		temp = cut_segments(s, &p);
 		data->segments[count] = temp;
+		if (are_quotes_open(data->segments[count]) == true)
+			return (false);
 		count++;
 	}
 	data->segments[count] = NULL;

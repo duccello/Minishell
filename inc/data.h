@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 10:24:54 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 10:25:08 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 10:41:27 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data
 }						t_data;
 
 t_data					*create_data(char **envp);
-void					init_data(t_data *data, char *s);
+int						init_data(t_data *data, char *s);
 bool					check_input(char *s);
 
 #endif

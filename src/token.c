@@ -6,12 +6,10 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:19:19 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 17:50:38 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 10:26:07 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/history.h>
-#include <readline/readline.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "cmd.h"
@@ -146,24 +144,6 @@ int		count_tokens(char *s, char **tracker)
 		i++;
 	}
 	return (counter);
-}
-
-void	toggle_quotes(char c, bool *in_quote, bool *in_dquote)
-{
-	if (c == '\'')
-	{
-		if (*in_quote == false && *in_dquote == false)
-			*in_quote = true;
-		else if (*in_quote == true && *in_dquote == false)
-			*in_quote = false;
-	}
-	else if (c == '"')
-	{
-		if (*in_dquote == false && *in_quote == false)
-			*in_dquote = true;
-		else if (*in_dquote == true && *in_quote == false)
-			*in_dquote = false;
-	}
 }
 
 t_tok	populate_token(char **s, char **tracker)
