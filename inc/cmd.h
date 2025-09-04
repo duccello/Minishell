@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 16:07:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/04 13:45:59 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:40:44 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_cmd
 	int		current_in;
 	int		current_out;
 	int		n_tokens;
+	int		n_redirectors;
 }			t_cmd;
 
 t_cmd		*parse_cmds(char *segment, t_data *data);

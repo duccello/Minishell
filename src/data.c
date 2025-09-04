@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:20:59 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/04 10:41:11 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:07:59 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	init_data(t_data *data, char *input)
 		i++;
 	}
 	count_cmds(data);
-//	g_flag = 0;
 	return (0);
 }
 

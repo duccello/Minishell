@@ -6,12 +6,14 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:09:47 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/01 10:38:07 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:21:51 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 #include "data.h"
+#include "list.h"
+#include <stdlib.h>
 
 void	free_array(char **c)
 {
@@ -24,7 +26,6 @@ void	free_array(char **c)
 		c[i] = NULL;
 		i++;
 	}
-	//free(c[i]);
 	free(c);
 	c = NULL;
 }
@@ -54,6 +55,21 @@ void	free_cmd(t_cmd *c)
 	c = NULL;
 }
 
+void	free_list(t_node *list)
+{
+	t_node *curr;
+	t_node *prev;
+
+	prev = list;
+	curr = prev->next;
+	while (curr != NULL)
+	{
+		free(prev);
+		prev = curr;
+		curr = curr->next;
+	}
+}
+
 void	clean_data(t_data *data)
 {
 	int	i;
@@ -62,7 +78,8 @@ void	clean_data(t_data *data)
 	if (data->cmds != NULL)
 	{
 		while (i < data->amount)
-			free_cmd(data->cmds[i++]);
+			if (data->cmds[i] != NULL)
+				free_cmd(data->cmds[i++]);
 		free(data->cmds);
 		data->cmds = NULL;
 	}
@@ -78,3 +95,12 @@ void	clean_data(t_data *data)
 	data->built_cmd = 0;
 	data->total_cmds = 0;
 }
+
+void clean(t_data *data)
+{
+	if (data->envp != NULL)
+		free_list(data->envp);
+	if (data->built_ins != NULL)
+		free_array(data->built_ins);
+}
+

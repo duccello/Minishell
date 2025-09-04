@@ -6,7 +6,7 @@
 /*   By: duccello <duccello@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:01:48 by duccello          #+#    #+#             */
-/*   Updated: 2025/09/04 13:38:17 by sgaspari         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:46:05 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	initiate_cmds(t_cmd *c, t_data *data, char *segment)
 {
 	c->data = data;
 	c->tokens = tokenize(segment, data, &(c->n_tokens));
-	c->argv = malloc(c->n_tokens * sizeof(char *));
+	c->n_redirectors = count_redirectors(c->tokens); //to implement
+	c->argv = malloc((c->n_tokens - c->redirectors) * sizeof(char *));
 	if (c->argv == NULL)
 		return ;
 	c->envp = create_array(data->envp);

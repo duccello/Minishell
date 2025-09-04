@@ -6,7 +6,7 @@
 /*   By: sgaspari <sgaspari@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:00:31 by sgaspari          #+#    #+#             */
-/*   Updated: 2025/09/03 15:50:12 by duccello         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:27:37 by sgaspari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**create_built_ins(void)
 {
 	char	**arr;
 
-	arr = malloc(sizeof(char *) * NUM_BUILT_INS + 1);
+	arr = malloc(sizeof(char *) * (NUM_BUILT_INS + 1));
 	if (arr == NULL)
 		return (NULL);
 	arr[ECHO] = ft_strdup("echo");
