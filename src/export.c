@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include <stdio.h>
-#include "list.h"
 #include "cmd.h"
 #include "data.h"
+#include "list.h"
+#include <stdbool.h>
+#include <stdio.h>
 
 static bool	is_var_dup(char *s, t_node *list);
 static int	find_equal(char *s);
@@ -52,7 +52,7 @@ static bool	is_var_dup(char *s, t_node *list)
 static int	find_equal(char *s)
 {
 	int	len;
-	
+
 	len = 0;
 	while (s[len] != '\0')
 	{

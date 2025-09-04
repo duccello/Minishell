@@ -35,9 +35,7 @@ void	handle_sigint(int signum)
 	(void)signum;
 	if (g_flag == 1)
 	{
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		exit(0);
+		kill(data->pid, SIGKILL)
 	}
 	else
 	{

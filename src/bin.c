@@ -26,9 +26,9 @@ int	exec_binary(t_cmd *c)
 	char	*path;
 
 	pid = fork();
+	g_flag = 1;
 	if (pid == 0)
 	{
-		g_flag = 1;
 		if (c->current_in != STDIN_FILENO)
 		{
 			dup2(c->current_in, STDIN_FILENO);

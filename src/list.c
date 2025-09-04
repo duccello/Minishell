@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "list.h"
 #include "libft.h"
+#include "list.h"
 #include "stddef.h"
+#include <stdlib.h>
 
 t_node	*create_list(char **arr)
 {
@@ -62,8 +62,14 @@ void	delete_node(t_node **list, char *s, int len)
 	t_node	*curr;
 	t_node	*prev;
 
-	prev = NULL;
-	curr = *list;
+	prev = *list;
+	curr = prev->next;
+	if (ft_strncmp(prev->s, s, len) == 0)
+	{
+		*list = curr;
+		free(prev);
+		return ;
+	}
 	while (curr != NULL)
 	{
 		if (ft_strncmp(curr->s, s, len) == 0)
